@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "724766878438",
+    "project_id": "joylink-b31dd",
+    "storage_bucket": "joylink-b31dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724766878438:android:50cd6598432869b7482927",
+        "android_client_info": {
+          "package_name": "in.socialmedia.joylink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ36gKF-RVZpjHP0Zf5Yrfkx4ID-6AbiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
