@@ -4,6 +4,7 @@ import 'package:joylink/model/bloc/authBloc/bloc/auth_bloc.dart';
 import 'package:joylink/model/bloc/authBloc/model/userdetails.dart';
 import 'package:joylink/view/screens/authScreen/utils/custom_button.dart';
 import 'package:joylink/view/screens/authScreen/utils/customtextformfield.dart';
+import 'package:joylink/view/screens/bottomNavigation/bottom_navigation.dart';
 import 'package:joylink/view/screens/home/home_screen.dart';
 
 class CreateLoginWarapper extends StatelessWidget {
@@ -37,15 +38,16 @@ class CreateLoginScreen extends StatelessWidget {
               'Enter correct email and password',
               style: TextStyle(color: Colors.black),
             ),
-            backgroundColor: Colors.red,
-          ));
+            backgroundColor: Colors.red,  
+          )
+          );
         }
       },
       builder: (context, state) {
         if (state is Authenticated) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (_) => const HomeScreen()),
+                MaterialPageRoute(builder: (_) => const BottomNavigationScreen()),
                 (route) => false);
           });
         }

@@ -12,7 +12,12 @@
           "package_name": "in.socialmedia.joylink"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "724766878438-u36ncl482aui4nq14ravcjf0ao3r6jed.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCJ36gKF-RVZpjHP0Zf5Yrfkx4ID-6AbiU"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "724766878438-u36ncl482aui4nq14ravcjf0ao3r6jed.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "724766878438-pv6hne856of9lqqh941b02hhiuqe5e5t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.joylink"
+              }
+            }
+          ]
         }
       }
     }

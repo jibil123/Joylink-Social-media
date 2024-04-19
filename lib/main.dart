@@ -2,6 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/firebase_options.dart';
+import 'package:joylink/model/bloc/bottomNavigation/bottom_navigation_bloc.dart';
+import 'package:joylink/model/bloc/forgotPassword/forgott_password_bloc.dart';
+import 'package:joylink/model/bloc/googleAuthBloc/google_auth_bloc.dart';
 import 'package:joylink/model/bloc/authBloc/bloc/auth_bloc.dart';
 import 'package:joylink/view/screens/splash/splash_screen.dart';
 
@@ -18,8 +21,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthBloc(),
+        ),
+        BlocProvider(
+          create: (context) => GoogleAuthBloc(),
+        ),
+        BlocProvider(
+          create: (context) => BottomNavigationBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ForgottPasswordBloc(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,

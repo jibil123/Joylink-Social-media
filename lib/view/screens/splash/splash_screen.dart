@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/authBloc/bloc/auth_bloc.dart';
 import 'package:joylink/view/screens/authScreen/mainLoginScreen/login_screen.dart';
-import 'package:joylink/view/screens/home/home_screen.dart';
+import 'package:joylink/view/screens/bottomNavigation/bottom_navigation.dart';
 
 class SplashScreenWrapper extends StatelessWidget {
   const SplashScreenWrapper({super.key});
@@ -25,7 +26,7 @@ class SplashScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is Authenticated) {
             Navigator.of(context)
-                .pushReplacement(MaterialPageRoute(builder: (context) =>const HomeScreen()));
+                .pushReplacement(MaterialPageRoute(builder: (context) =>const BottomNavigationScreen()));
           } else if (state is UnAuthenticated) {
             Navigator.of(context)
                 .pushReplacement(MaterialPageRoute(builder: (context) =>const LoginScreenWrapper()));
