@@ -40,7 +40,7 @@ class ForgottPassswordScreen extends StatelessWidget {
           );
         }
         return Scaffold(
-          appBar: AppBar(title: Text('Reset password')),
+          appBar: AppBar(title:const Text('Reset password')),
           body: Form(
             key: _formkey,
             child: Padding(

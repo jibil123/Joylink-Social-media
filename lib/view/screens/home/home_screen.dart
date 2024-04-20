@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
     final authBloc = BlocProvider.of<AuthBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        leading:const Text('Home'),
+        title:const Text('Home',style: TextStyle(fontWeight: FontWeight.bold),),
         actions: [
           IconButton(
               onPressed: () {

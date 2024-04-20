@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/authBloc/bloc/auth_bloc.dart';
 import 'package:joylink/model/bloc/authBloc/model/userdetails.dart';
+import 'package:joylink/utils/colors.dart';
 import 'package:joylink/view/screens/authScreen/utils/custom_button.dart';
 import 'package:joylink/view/screens/authScreen/utils/customtextformfield.dart';
 import 'package:joylink/view/screens/bottomNavigation/bottom_navigation.dart';
@@ -54,7 +55,7 @@ class CreateLoginScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.white),
-            backgroundColor: Colors.black,
+            backgroundColor: AppColors.blackColor,
           ),
           body: Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),

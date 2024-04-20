@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
         }
         return Scaffold(
           body: BlocListener<GoogleAuthBloc, GoogleAuthState>(
-            listener: (context, state) {
+            listener: (context, state) {         
               if (state is GoogleAuthSuccess) {
                 print('success');
                 WidgetsBinding.instance.addPostFrameCallback((_) {
