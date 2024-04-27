@@ -10,5 +10,5 @@ List<Widget> tabs = [
   const SearchScreen(),
   const PostScreen(),
   const SettingScreen(),
-  ProfileScreen()
+  const ProfileScreen()
 ];

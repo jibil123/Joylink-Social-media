@@ -28,16 +28,19 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  bloc: ^8.1.4
   cloud_firestore: ^4.16.1
   cupertino_icons: ^1.0.6
   firebase_auth: ^4.19.1
   firebase_core: ^2.29.0
-  firebase_storage: ^11.7.1
+  firebase_storage: ^11.7.4
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.5
   google_sign_in: ^6.2.1
+  image_picker: ^1.1.0
   lottie: ^3.1.0
+  meta: ^1.11.0
 
 dev_dependencies:
   flutter_lints: ^3.0.0
@@ -60,6 +63,8 @@ flutter:
     - assets/animations/animation_1.json
     - assets/animations/animation_2.json
     - assets/animations/animation_3.json
+    - assets/images/cover_photo.jpg
+    - assets/images/pngegg.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

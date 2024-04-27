@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:joylink/utils/colors.dart';
-import 'package:joylink/utils/media-Quary.dart';
+import 'package:joylink/utils/media_quary.dart';
 import 'package:joylink/view/screens/authScreen/widgets/bottomNavigation/nav_icons.dart';
 
 Container bottomNavigationBarContainer(BuildContext context) {

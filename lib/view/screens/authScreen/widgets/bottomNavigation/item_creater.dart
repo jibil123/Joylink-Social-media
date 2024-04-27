@@ -2,8 +2,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/bottomNavigation/bottom_navigation_bloc.dart';
 import 'package:joylink/utils/colors.dart';
-import 'package:joylink/utils/media-Quary.dart';
-import 'package:joylink/view/screens/authScreen/utils/bottomNavigaiton/pageChangingList.dart';
+import 'package:joylink/utils/media_quary.dart';
+import 'package:joylink/view/screens/authScreen/utils/bottomNavigaiton/page_changing_list.dart';
 
 Material bottomNavIcons(
       BuildContext context, IconData icon, int itemPosition) {
@@ -23,7 +23,7 @@ Material bottomNavIcons(
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 400),
-          padding: EdgeInsets.all(mediaqueryHeight(0.02, context)),
+          padding: EdgeInsets.all(mediaqueryWidth(0.02, context)),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: isSelected ? selectedColor : deselectedColor,

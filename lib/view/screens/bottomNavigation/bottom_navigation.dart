@@ -17,7 +17,7 @@ class BottomNavigationScreen extends StatelessWidget {
           return AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
             transitionBuilder: (Widget child, Animation<double> animation) {
-              return FadeTransition(child: child, opacity: animation);
+              return FadeTransition(opacity: animation, child: child);
             },
             child: tabs[state.currentPageIndex],
           );

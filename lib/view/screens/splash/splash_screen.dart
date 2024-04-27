@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/authBloc/bloc/auth_bloc.dart';
@@ -25,11 +24,11 @@ class SplashScreen extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is Authenticated) {
-            Navigator.of(context)
-                .pushReplacement(MaterialPageRoute(builder: (context) =>const BottomNavigationScreen()));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => const BottomNavigationScreen()));
           } else if (state is UnAuthenticated) {
-            Navigator.of(context)
-                .pushReplacement(MaterialPageRoute(builder: (context) =>const LoginScreenWrapper()));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => const LoginScreenWrapper()));
           }
         },
         child: const Scaffold(

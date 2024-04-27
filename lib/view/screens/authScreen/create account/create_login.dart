@@ -6,7 +6,6 @@ import 'package:joylink/utils/colors.dart';
 import 'package:joylink/view/screens/authScreen/utils/custom_button.dart';
 import 'package:joylink/view/screens/authScreen/utils/customtextformfield.dart';
 import 'package:joylink/view/screens/bottomNavigation/bottom_navigation.dart';
-import 'package:joylink/view/screens/home/home_screen.dart';
 
 class CreateLoginWarapper extends StatelessWidget {
   const CreateLoginWarapper({super.key});

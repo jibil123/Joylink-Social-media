@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/GoogleAuthBloc/google_auth_bloc.dart';
 import 'package:joylink/model/bloc/authBloc/bloc/auth_bloc.dart';
@@ -65,7 +64,7 @@ class LoginScreen extends StatelessWidget {
           body: BlocListener<GoogleAuthBloc, GoogleAuthState>(
             listener: (context, state) {         
               if (state is GoogleAuthSuccess) {
-                print('success');
+                // print('success');
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(

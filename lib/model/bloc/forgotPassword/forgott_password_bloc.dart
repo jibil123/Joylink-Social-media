@@ -14,10 +14,10 @@ class ForgottPasswordBloc extends Bloc<ForgottPasswordEvent, ForgottPasswordStat
       await googleSignIn.signOut();
       try{
         await FirebaseAuth.instance.sendPasswordResetEmail(email: event.email.trim());
-        print('success');
+        // print('success');
         emit(ResetSuccssState());
       }catch(e){
-         print(e.toString());
+        //  print(e.toString());
          emit(ResetErrorState());
       }
     });

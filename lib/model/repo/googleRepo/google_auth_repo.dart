@@ -13,7 +13,7 @@ class AuthRepository {
           await FirebaseAuth.instance.signInWithCredential(credentials);
       return userCredential.user;
     } catch (e) {
-      print(e);
+      // print(e);
       return null;
     }
   }

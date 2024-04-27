@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/firebase_options.dart';
 import 'package:joylink/model/bloc/bottomNavigation/bottom_navigation_bloc.dart';
+import 'package:joylink/model/bloc/editDetials/edit_details_bloc.dart';
 import 'package:joylink/model/bloc/forgotPassword/forgott_password_bloc.dart';
 import 'package:joylink/model/bloc/googleAuthBloc/google_auth_bloc.dart';
 import 'package:joylink/model/bloc/authBloc/bloc/auth_bloc.dart';
+import 'package:joylink/model/bloc/profilePhoto/profile_photo_bloc.dart';
 import 'package:joylink/view/screens/splash/splash_screen.dart';
 
 void main() async {
@@ -34,6 +36,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ForgottPasswordBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ProfilePhotoBloc(),
+        ),
+                BlocProvider(
+          create: (context) => EditDetailsBloc(),
         ),
       ],
       child: MaterialApp(
