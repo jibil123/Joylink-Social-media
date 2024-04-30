@@ -8,7 +8,7 @@ import 'package:joylink/view/screens/settingsScreen/setttings_screen.dart';
 List<Widget> tabs = [
   const HomeScreen(),
   const SearchScreen(),
-  const PostScreen(),
+   PostScreen(),
   const SettingScreen(),
   const ProfileScreen()
 ];

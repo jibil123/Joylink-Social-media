@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/firebase_options.dart';
+import 'package:joylink/model/bloc/postBloc/post_bloc.dart';
 import 'package:joylink/model/bloc/bottomNavigation/bottom_navigation_bloc.dart';
 import 'package:joylink/model/bloc/editDetials/edit_details_bloc.dart';
 import 'package:joylink/model/bloc/forgotPassword/forgott_password_bloc.dart';
@@ -40,8 +41,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ProfilePhotoBloc(),
         ),
-                BlocProvider(
+        BlocProvider(
           create: (context) => EditDetailsBloc(),
+        ),
+        BlocProvider(
+          create: (context) => PostBloc(),
         ),
       ],
       child: MaterialApp(
