@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:joylink/model/bloc/authBloc/model/post_model.dart';
 import 'package:joylink/model/bloc/postBloc/post_bloc.dart';
 import 'package:joylink/utils/colors.dart';
 import 'package:joylink/utils/media_quary.dart';
@@ -15,7 +14,7 @@ class PostPhotoScreen extends StatelessWidget {
     return BlocConsumer<PostBloc, PostState>(
       listener: (context, state) {
         if (state is PostPhotoAdded) {
-          print('Photo added, length: ${state.photo.length}');
+          
         }
       },
       builder: (context, state) {
@@ -26,8 +25,8 @@ class PostPhotoScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(20)),
           width: mediaqueryWidth(9, context),
           height: mediaqueryHeight(0.3, context),
-          child: state is PostPhotoAdded
-              ? Image.memory(state.photo, fit: BoxFit.contain)
+          child: postBloc.postModel.photo!=null
+              ? Image.memory(postBloc.postModel.photo!, fit: BoxFit.contain)
               : Center(
                   child: IconButton(
                       onPressed: () async {

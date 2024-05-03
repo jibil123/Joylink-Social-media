@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:joylink/model/bloc/authBloc/model/post_model.dart';
+import 'package:joylink/model/model/post_model.dart';
 import 'package:joylink/model/bloc/postBloc/post_bloc.dart';
 import 'package:joylink/utils/media_quary.dart';
 import 'package:joylink/view/screens/authScreen/utils/custom_elevated_button.dart';
 import 'package:joylink/view/screens/authScreen/utils/customtextformfield.dart';
+import 'package:joylink/view/screens/postScreen/location_screen.dart';
 import 'package:joylink/view/screens/postScreen/post_photo.dart';
 
 class PostScreen extends StatelessWidget {
@@ -14,6 +15,7 @@ class PostScreen extends StatelessWidget {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController descriptionController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class PostScreen extends StatelessWidget {
     return BlocConsumer<PostBloc, PostState>(
       listener: (context, state) {
         if (state is PostSavedState) {
-          descriptionController.text = '';
+          descriptionController.text='';
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Successfully done'),
             backgroundColor: Colors.green,
@@ -33,6 +35,14 @@ class PostScreen extends StatelessWidget {
             content: Text('Upload canceled'),
             backgroundColor: Colors.red,
           ));
+        }
+        if (state is AddPhotoBeforeUpload) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Please add a photo before upload'),
+              backgroundColor: Colors.red,
+            ),
+          );
         }
       },
       builder: (context, state) {
@@ -51,6 +61,10 @@ class PostScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       const PostPhotoScreen(),
+                      SizedBox(
+                        height: mediaqueryHeight(0.03, context),
+                      ),
+                      LocationScreen(),
                       SizedBox(
                         height: mediaqueryHeight(0.03, context),
                       ),
@@ -74,27 +88,15 @@ class PostScreen extends StatelessWidget {
                           CustomElevatedButton(
                               label: 'Save',
                               onPressed: () {
-                                if (state is PostPhotoAdded) {
-                                  var postdata = PostModel(
-                                      description: descriptionController.text,
-                                      photo: (state).photo);
-                                  postbloc
-                                      .add(SavePostEvent(postModel: postdata));
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                          'Please add a photo before upload'),
-                                      backgroundColor: Colors.red,
-                                    ),
-                                  );
-                                }
+                                postbloc.postModel.description =
+                                    descriptionController.text;
+                                postbloc.add(SavePostEvent());
                               },
                               icon: Icons.save),
                           CustomElevatedButton(
                               label: 'Cancel',
                               onPressed: () {
-                                descriptionController.text = '';
+                                descriptionController.text='';
                                 postbloc.add(CancelPostEvent());
                               },
                               icon: Icons.cancel)

@@ -6,9 +6,9 @@ sealed class PostState {}
 final class PostInitial extends PostState {}
 
 class PostPhotoAdded extends PostState {
-  final Uint8List photo;
+  final PostModel postModel;
 
-  PostPhotoAdded({required this.photo});
+  PostPhotoAdded({required this.postModel});
 }
 
 class PostDescriptionUpdatedState extends PostState {
@@ -22,3 +22,13 @@ class PostSavedState extends PostState {}
 class PostCanceledState extends PostState {}
 
 class PostLoadingState extends PostState {}
+
+class CurrentLocationNameState extends PostState{
+  final PostModel? postModel;
+
+  CurrentLocationNameState({ this.postModel});
+  
+}
+
+class AddPhotoBeforeUpload extends PostState{
+}

@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:joylink/model/bloc/authBloc/model/userdetails.dart';
+import 'package:joylink/model/model/post_model.dart';
+import 'package:joylink/model/model/userdetails.dart';
 import 'package:meta/meta.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -34,7 +35,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             email: event.user.email.toString(),
             password: event.user.password.toString());
         final user = userCredential.user;
-
+        PostModel(name:event.user.name);
         if (user != null) {
           FirebaseFirestore.instance.collection('users').doc(user.uid).set({
             'uid': user.uid,
@@ -70,8 +71,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(UnAuthenticated());
         }
       }catch(e){
-        emit(AuthenticatedErrors(message: e.toString()));
-        
+        emit(AuthenticatedErrors(message: e.toString()));       
       }
     });
   }

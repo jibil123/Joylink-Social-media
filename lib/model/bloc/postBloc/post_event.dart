@@ -10,9 +10,9 @@ class AddPhoto extends PostEvent {
 }
 
 class SavePostEvent extends PostEvent {
-  final PostModel postModel;
-
-  SavePostEvent({required this.postModel});
 }
 
 class CancelPostEvent extends PostEvent {}
+
+class AddLocationEvent extends PostEvent{}
+
