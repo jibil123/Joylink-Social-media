@@ -35,9 +35,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             email: event.user.email.toString(),
             password: event.user.password.toString());
         final user = userCredential.user;
-        PostModel(name:event.user.name);
         if (user != null) {
-          FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          FirebaseFirestore.instance.collection('user details').doc(user.uid).set({
             'uid': user.uid,
             'mail': user.email,
             'name': event.user.name,

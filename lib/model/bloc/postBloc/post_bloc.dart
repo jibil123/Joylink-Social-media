@@ -42,12 +42,14 @@ class PostBloc extends Bloc<PostEvent, PostState> {
           firebase_storage.SettableMetadata(contentType: 'image/jpeg');
       await ref.putData(postModel.photo!, metadata);
       String downloadURL = await ref.getDownloadURL();
+      DateTime now=DateTime.now();
+      String dateOnly=now.toString();
       await FirebaseFirestore.instance.collection('user post').add({
         'uid':postModel.id,
         'description': postModel.description,
         'photoUrl': downloadURL,
         'location':postModel.location,
-        'time': DateTime.now()
+        'time': dateOnly,
       });
       postModel.id=null;
       postModel.location=null;
@@ -55,7 +57,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       postModel.photo=null;
       emit(PostSavedState());
     } catch (e) {
-      print(e.toString());
+      print( e.toString());
     }
   }
 

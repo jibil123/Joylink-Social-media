@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:joylink/model/bloc/PostFetchBloc/post_bloc.dart';
 import 'package:joylink/model/model/post_model.dart';
 import 'package:joylink/model/bloc/postBloc/post_bloc.dart';
 import 'package:joylink/utils/media_quary.dart';
@@ -16,11 +17,11 @@ class PostScreen extends StatelessWidget {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController locationController = TextEditingController();
-
+  
   @override
   Widget build(BuildContext context) {
     final postbloc = BlocProvider.of<PostBloc>(context);
-
+    final postFetchBloc = BlocProvider.of<PostFetchBloc>(context);
     return BlocConsumer<PostBloc, PostState>(
       listener: (context, state) {
         if (state is PostSavedState) {
@@ -29,6 +30,7 @@ class PostScreen extends StatelessWidget {
             content: Text('Successfully done'),
             backgroundColor: Colors.green,
           ));
+         postFetchBloc.add(FetchPostsEvent());
         }
         if (state is PostCanceledState) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

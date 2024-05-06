@@ -8,7 +8,7 @@ Container bottomNavigationBarContainer(BuildContext context) {
     margin: EdgeInsets.all(mediaqueryHeight(0.02, context)),
     width: double.infinity, 
     decoration: BoxDecoration(
-        color:AppColors.blackColor, borderRadius: BorderRadius.circular(90)),
+        color:AppColors.blackColor, borderRadius: BorderRadius.circular(20)),
     height: mediaqueryHeight(0.09, context),
     child: bottomNavIconsAndContainers(context),
   );

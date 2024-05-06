@@ -7,16 +7,11 @@ class PostModel {
   Uint8List? photo;
   String? description;
   String? id;
-  String? name;
-  String? profileImage;
-  String? postImage;
+
   
   PostModel(
       {this.photo,
       this.description,
       this.id,
-      this.location,
-      this.profileImage,
-      this.name,
-      this.postImage});
+      this.location,});
 }

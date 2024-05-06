@@ -4,3 +4,5 @@ part of 'google_auth_bloc.dart';
 sealed class GoogleAuthEvent {}
 
 final class SigninEvent extends GoogleAuthEvent{}
+
+final class CheckGoogleStatusEvent extends GoogleAuthEvent{}

@@ -17,7 +17,7 @@ class ProfilePhoto extends StatelessWidget {
     return StreamBuilder<DocumentSnapshot>(
       stream: auth.currentUser != null
           ? firestore
-              .collection('users')
+              .collection('user details')
               .doc(auth.currentUser!.uid)
               .snapshots()
           : null,
@@ -29,34 +29,44 @@ class ProfilePhoto extends StatelessWidget {
         final data = snapshot.data!.data() as Map<String, dynamic>?;
         final imageUrl = data?['imageUrl'] as String?;
 
-        return Positioned(
-          top: 200,
-          left: 10,
-          child: GestureDetector(
-            onTap: () {
-              selectPhotoForProfile.add(SelectPhotoFromCamAndGal());
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: AppColors.whiteColor, width: 5),
-              ),
-              child: imageUrl != null
-                  ? CircleAvatar(
-                      radius: 80,
-                      backgroundImage: NetworkImage(imageUrl),
-                    )
-                  : const CircleAvatar(
-                      radius: 80,
-                      backgroundColor: AppColors.primaryColor,
-                      child: ClipOval(
-                        child: Image(
-                          image: AssetImage('assets/images/pngegg.png'),
+        return BlocBuilder<ProfilePhotoBloc, ProfilePhotoState>(
+          builder: (context, state) {
+            if(state is LoadingprofileState){
+              return const Padding(
+                padding:  EdgeInsets.only(right: 200,top: 250),
+                child: Center(child: CircularProgressIndicator()),
+              );
+            }
+            return Positioned(
+              top: 200,
+              left: 10,
+              child: GestureDetector(
+                onTap: () {
+                  selectPhotoForProfile.add(SelectPhotoFromCamAndGal());
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColors.whiteColor, width: 5),
+                  ),
+                  child: imageUrl != null
+                      ? CircleAvatar(
+                          radius: 80,
+                          backgroundImage: NetworkImage(imageUrl),
+                        )
+                      : const CircleAvatar(
+                          radius: 80,
+                          backgroundColor: AppColors.primaryColor,
+                          child: ClipOval(
+                            child: Image(
+                              image: AssetImage('assets/images/pngegg.png'),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-            ),
-          ),
+                ),
+              ),
+            );
+          },
         );
       },
     );

@@ -17,7 +17,7 @@ class EditDetailsBloc extends Bloc<EditDetailsEvent, EditDetailsState> {
       FetchUserDataEvent event, Emitter<EditDetailsState> emit) async {
     final user = _auth.currentUser;
     if (user != null) {
-      final snapshot = await _firestore.collection('users').doc(user.uid).get();
+      final snapshot = await _firestore.collection('user details').doc(user.uid).get();
       final userData = snapshot.data() as Map<String, dynamic>;
       emit(UserDataFetched(userData: userData));
     } else {
@@ -31,7 +31,7 @@ class EditDetailsBloc extends Bloc<EditDetailsEvent, EditDetailsState> {
     if (user != null) {
       try {
         await _firestore
-            .collection('users')
+            .collection('user details')
             .doc(user.uid)
             .update({'name': event.name, 'bio': event.bio});
         emit(UserDataUpdated());

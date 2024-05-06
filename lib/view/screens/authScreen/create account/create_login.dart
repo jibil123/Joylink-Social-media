@@ -53,8 +53,7 @@ class CreateLoginScreen extends StatelessWidget {
         }
         return Scaffold(
           appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.white),
-            backgroundColor: AppColors.blackColor,
+            title:const Text('Create account'),
           ),
           body: Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
