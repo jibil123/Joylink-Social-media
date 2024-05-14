@@ -14,4 +14,10 @@ class ProfilePictureSelectedState extends ProfilePhotoState {
   ProfilePictureSelectedState({required this.imageFile});
 }
 
-class ShowdiologProfileState extends ProfilePhotoState{}
+class LoadingCoverState extends ProfilePhotoState{}
+
+class CoverPictureSelectedState extends ProfilePhotoState {
+  final String? imageFile;
+
+  CoverPictureSelectedState({required this.imageFile});
+}

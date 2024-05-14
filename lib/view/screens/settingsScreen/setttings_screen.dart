@@ -13,7 +13,7 @@ class SettingScreen extends StatelessWidget {
     final authBloc = BlocProvider.of<AuthBloc>(context);
     return Scaffold(
         appBar: AppBar(
-          title: Text('Settings'),
+          title: const Text('Settings'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(15),

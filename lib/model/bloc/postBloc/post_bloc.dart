@@ -57,7 +57,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       postModel.photo=null;
       emit(PostSavedState());
     } catch (e) {
-      print( e.toString());
+     return;
     }
   }
 
@@ -87,7 +87,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
           emit(CurrentLocationNameState(postModel: postModel));
       }
     } catch (e) {
-      print(e.toString());
+     return;
     }
   }
 }

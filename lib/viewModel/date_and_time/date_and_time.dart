@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 
 class DateAndTime {
   String formatRelativeTime(String dateTimeString) {

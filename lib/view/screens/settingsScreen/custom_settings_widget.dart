@@ -20,10 +20,10 @@ class SettingsItem extends StatelessWidget {
       child: Row(
         children: [
           Icon(icon, size: 35, color: Colors.white),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 23,
               fontWeight: FontWeight.bold,
               fontFamily: 'ABeeZee',

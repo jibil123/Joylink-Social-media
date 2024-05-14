@@ -25,7 +25,7 @@ class SplashScreenWrapper extends StatelessWidget {
 }
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key});
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

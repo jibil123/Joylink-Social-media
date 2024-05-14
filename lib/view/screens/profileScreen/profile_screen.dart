@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:joylink/utils/colors.dart';
-import 'package:joylink/view/screens/profileScreen/user_post.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/profile_picture.dart';
 import 'package:joylink/view/screens/profileScreen/userdata/userdata.dart';
 

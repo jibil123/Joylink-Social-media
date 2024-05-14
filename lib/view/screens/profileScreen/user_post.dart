@@ -6,8 +6,8 @@ import 'package:joylink/utils/media_quary.dart';
 import 'package:joylink/viewModel/date_and_time/date_and_time.dart';
 
 class UserPosts extends StatelessWidget {
-   UserPosts({super.key});
-  final DateAndTime dateAndTime =DateAndTime();
+  UserPosts({super.key});
+  final DateAndTime dateAndTime = DateAndTime();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,17 +71,38 @@ class UserPosts extends StatelessWidget {
                             },
                           ),
                         ),
-                        SizedBox(
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.vertical(
+                                bottom: Radius.circular(15)),
+                          ),
                           width: double.infinity,
                           height: mediaqueryHeight(0.2, context),
-                          child: Image.network(post.image),
+                          child: Image.network(
+                            post.image,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              double? progress =
+                                  loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                      : null;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: progress,
+                                ),
+                              );
+                            },
+                          ),
                         ),
                         Padding(
-                            padding: const EdgeInsets.only(left: 15,top: 5),
-                            child: Text("Posted on : ${dateAndTime.formatRelativeTime(post.dateAndTime)}"),
-                          ),
+                          padding: const EdgeInsets.only(left: 15, top: 5),
+                          child: Text(
+                              "Posted on : ${dateAndTime.formatRelativeTime(post.dateAndTime)}"),
+                        ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 15,top: 5),
+                          padding: const EdgeInsets.only(left: 15, top: 5),
                           child: SizedBox(
                               height: 40, child: Text(post.description)),
                         ),

@@ -11,9 +11,10 @@ class LocationService{
         }
       }
       catch(e){
-        print(e);
+        return null;
       }
       return null;
     }
+    return null;
   }
 }

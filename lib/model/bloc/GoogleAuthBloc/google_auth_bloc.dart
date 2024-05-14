@@ -24,7 +24,7 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
           emit(GoogleAuthError());
         }
       } catch (e) {
-        print(e.toString());
+       return;
       }
     });
   }
@@ -44,7 +44,7 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
 
       if (userDoc.exists) {
         emit(GoogleAuthSuccess());
-        print('User is signed in and exists in Firestore');
+        
       } else {
         final name = user.email?.split('@').first;
         // print(name);

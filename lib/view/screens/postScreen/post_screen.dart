@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/PostFetchBloc/post_bloc.dart';
-import 'package:joylink/model/model/post_model.dart';
 import 'package:joylink/model/bloc/postBloc/post_bloc.dart';
 import 'package:joylink/utils/media_quary.dart';
 import 'package:joylink/view/screens/authScreen/utils/custom_elevated_button.dart';
@@ -14,9 +13,9 @@ class PostScreen extends StatelessWidget {
     super.key,
   });
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController descriptionController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
   
   @override
   Widget build(BuildContext context) {

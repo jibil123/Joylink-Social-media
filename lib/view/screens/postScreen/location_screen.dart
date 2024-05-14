@@ -4,9 +4,9 @@ import 'package:joylink/model/bloc/postBloc/post_bloc.dart';
 import 'package:joylink/view/screens/authScreen/utils/customtextformfield.dart';
 
 class LocationScreen extends StatelessWidget {
-  LocationScreen({Key? key}) : super(key: key);
+  LocationScreen({super.key});
 
-  TextEditingController locationController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
   
   @override
   Widget build(BuildContext context) {

@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/PostFetchBloc/post_bloc.dart';
-import 'package:joylink/model/model/fetch_model.dart';
-import 'package:joylink/utils/colors.dart';
-import 'package:joylink/utils/media_quary.dart';
 import 'package:joylink/view/screens/home/post_details.dart';
-import 'package:joylink/viewModel/date_and_time/date_and_time.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

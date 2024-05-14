@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:joylink/view/screens/profileScreen/widgets/cover_image.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/follow_text_widget.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/profile_photo.dart';
 
@@ -11,12 +13,7 @@ class ProfilePhotoScreen extends StatelessWidget {
       height: 400, // Set the height of the container
       child: Stack(
         children: [
-          const Image(
-            height: 250,
-            width: double.infinity,
-            image: AssetImage('assets/images/cover_photo.jpg'),
-            fit: BoxFit.cover,
-          ),
+          const CoverImage(),
           Positioned(
             top: 275 , // Adjusted top position
             right: 10, // Adjusted right position
