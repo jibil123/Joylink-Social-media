@@ -20,7 +20,7 @@ class PostPhotoScreen extends StatelessWidget {
       builder: (context, state) {
         return Container(
           decoration: BoxDecoration(
-              color: Colors.grey,
+              color: AppColors.greyColor,
               border: Border.all(color: AppColors.whiteColor, width: 5),
               borderRadius: BorderRadius.circular(20)),
           width: mediaqueryWidth(9, context),

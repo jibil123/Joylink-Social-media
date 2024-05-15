@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/PostFetchBloc/post_bloc.dart';
 import 'package:joylink/model/bloc/postBloc/post_bloc.dart';
+import 'package:joylink/utils/colors.dart';
 import 'package:joylink/utils/media_quary.dart';
 import 'package:joylink/view/screens/authScreen/utils/custom_elevated_button.dart';
 import 'package:joylink/view/screens/authScreen/utils/customtextformfield.dart';
@@ -27,21 +28,21 @@ class PostScreen extends StatelessWidget {
           descriptionController.text='';
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Successfully done'),
-            backgroundColor: Colors.green,
+            backgroundColor: AppColors.primaryColor,
           ));
          postFetchBloc.add(FetchPostsEvent());
         }
         if (state is PostCanceledState) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Upload canceled'),
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.redColor,
           ));
         }
         if (state is AddPhotoBeforeUpload) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Please add a photo before upload'),
-              backgroundColor: Colors.red,
+              backgroundColor: AppColors.redColor,
             ),
           );
         }

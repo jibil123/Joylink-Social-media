@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:joylink/model/model/fetch_model.dart';
 import 'package:joylink/utils/colors.dart';
 import 'package:joylink/utils/media_quary.dart';
+import 'package:joylink/view/screens/home/image_preview.dart';
 import 'package:joylink/viewModel/date_and_time/date_and_time.dart';
 
 class UsersPostCard extends StatelessWidget {
@@ -24,10 +26,13 @@ class UsersPostCard extends StatelessWidget {
         children: [
           ListTile(
             contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-            leading:user.profilePic.isNotEmpty?
-             CircleAvatar( 
-              backgroundImage: NetworkImage(user.profilePic),
-            ):const CircleAvatar(backgroundColor: AppColors.primaryColor,),
+            leading: user.profilePic.isNotEmpty
+                ? CircleAvatar(
+                    backgroundImage: NetworkImage(user.profilePic),
+                  )
+                : const CircleAvatar(
+                    backgroundColor: AppColors.primaryColor,
+                  ),
             title: Text(
               user.name,
               style: const TextStyle(
@@ -44,27 +49,35 @@ class UsersPostCard extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            width: double.infinity,
-            height: mediaqueryHeight(0.2, context),
-            decoration: const BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
-            ),
-            child: Image.network(
-              post.image,
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                double? progress = loadingProgress.expectedTotalBytes != null
-                    ? loadingProgress.cumulativeBytesLoaded /
-                        loadingProgress.expectedTotalBytes!
-                    : null;
-                return Center(
-                  child: CircularProgressIndicator(
-                    value: progress,
-                  ),
-                );
-              },
+          GestureDetector(
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ImagePreviewScreen(
+                      description: post.description,
+                      imageUrl: post.image,
+                    ))),
+            child: Container(
+              width: double.infinity,
+              height: mediaqueryHeight(0.2, context),
+              decoration: const BoxDecoration(
+                color: AppColors.greyColor,
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.circular(15)),
+              ),
+              child: Image.network(
+                post.image,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  double? progress = loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
+                      : null;
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value: progress,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           Padding(

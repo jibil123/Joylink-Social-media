@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/GoogleAuthBloc/google_auth_bloc.dart';
 import 'package:joylink/model/bloc/authBloc/bloc/auth_bloc.dart';
+import 'package:joylink/utils/colors.dart';
 import 'package:joylink/view/screens/authScreen/forgotPasswordScreen/forgot_password.dart';
-import 'package:joylink/view/screens/authScreen/introApp/text1.dart';
+import 'package:joylink/view/screens/authScreen/onBordingScreen/text1.dart';
 import 'package:joylink/view/screens/authScreen/widgets/googles_signin.dart';
 import 'package:joylink/view/screens/authScreen/utils/custom_button.dart';
 import 'package:joylink/view/screens/authScreen/utils/customtextformfield.dart';
@@ -42,9 +43,9 @@ class LoginScreen extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
               'Enter correct email and password',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: AppColors.blackColor),
             ),
-            backgroundColor: Colors.red,
+            backgroundColor:AppColors.redColor,
           ));
         }
       },

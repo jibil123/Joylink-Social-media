@@ -65,11 +65,13 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/animations/animation_2.1.json
     - assets/images/joylink-logo.png
     - assets/images/google.png
     - assets/animations/animation_1.json
     - assets/animations/animation_2.json
     - assets/animations/animation_3.json
+    - assets/animations/Animation - 1715751904943.json
     - assets/images/cover_photo.jpg
     - assets/images/pngegg.png
   # An image asset can refer to one or more resolution-specific "variants", see
