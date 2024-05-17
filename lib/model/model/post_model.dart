@@ -14,4 +14,6 @@ class PostModel {
       this.description,
       this.id,
       this.location,});
+
+ 
 }

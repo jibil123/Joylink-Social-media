@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:joylink/model/model/fetch_model.dart';
+import 'package:joylink/model/model/saved_post_model.dart';
 import 'package:joylink/utils/colors.dart';
 import 'package:joylink/utils/media_quary.dart';
 import 'package:joylink/view/screens/home/image_preview.dart';
+import 'package:joylink/view/screens/home/popup_menu_button.dart';
 import 'package:joylink/viewModel/date_and_time/date_and_time.dart';
 
 class UsersPostCard extends StatelessWidget {
   UsersPostCard({
     super.key,
-    required this.user,
-    required this.post,
+    required this.savedPostModel,
+    required this.isSaveOrNot
   });
-  final User user;
-  final UserPost post;
   final DateAndTime dateAndTime = DateAndTime();
-
+  final SavedPostModel savedPostModel;
+  final bool isSaveOrNot;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -26,34 +25,36 @@ class UsersPostCard extends StatelessWidget {
         children: [
           ListTile(
             contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-            leading: user.profilePic.isNotEmpty
+            leading: savedPostModel.profileImage.isNotEmpty
                 ? CircleAvatar(
-                    backgroundImage: NetworkImage(user.profilePic),
+                    backgroundImage: NetworkImage(savedPostModel.profileImage),
                   )
-                : const CircleAvatar(
-                    backgroundColor: AppColors.primaryColor,
+                : ClipOval(
+                    child: Container(
+                      width: 40,
+                      height: 60,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/joylink-logo.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
                   ),
             title: Text(
-              user.name,
+              savedPostModel.name,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            subtitle: Text(post.location),
-            trailing: PopupMenuButton(
-              itemBuilder: (context) => [
-                const PopupMenuItem(
-                  value: 'save',
-                  child: Text('Save'),
-                ),
-              ],
-            ),
+            subtitle: Text(savedPostModel.location),
+            trailing: PopupHomeMenu(savedPostModel: savedPostModel,isSaveOrNot: isSaveOrNot,),
           ),
           GestureDetector(
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ImagePreviewScreen(
-                      description: post.description,
-                      imageUrl: post.image,
+                      description: savedPostModel.description,
+                      imageUrl: savedPostModel.postImage,
                     ))),
             child: Container(
               width: double.infinity,
@@ -64,7 +65,7 @@ class UsersPostCard extends StatelessWidget {
                     BorderRadius.vertical(bottom: Radius.circular(15)),
               ),
               child: Image.network(
-                post.image,
+                savedPostModel.postImage,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) return child;
                   double? progress = loadingProgress.expectedTotalBytes != null
@@ -81,9 +82,9 @@ class UsersPostCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            padding: const EdgeInsets.only(left: 15, top: 5),
             child: Text(
-              "Posted on: ${dateAndTime.formatRelativeTime(post.dateAndTime)}",
+              "Posted on: ${dateAndTime.formatRelativeTime(savedPostModel.date)}",
               style: const TextStyle(
                 fontStyle: FontStyle.italic,
                 color: Colors.grey,
@@ -91,9 +92,9 @@ class UsersPostCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
             child: Text(
-              post.description,
+              savedPostModel.description,
               style: const TextStyle(
                 fontSize: 16,
               ),
