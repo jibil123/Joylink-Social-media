@@ -66,7 +66,7 @@ class HomeScreen extends StatelessWidget {
             } else if (state is PostLoaded) {
               final users = state.users;
               final sortedPosts = state.sortedPosts;
-              if (users.isEmpty || sortedPosts.isEmpty) {
+              if (sortedPosts.isEmpty) {
                 return const Center(child: Text('No data found'));
               }
               return ListView.builder(

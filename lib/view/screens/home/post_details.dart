@@ -79,7 +79,7 @@ class UsersPostCard extends StatelessWidget {
                   );
                 },
               ),
-            ),
+            ), 
           ),
           Padding(
             padding: const EdgeInsets.only(left: 15, top: 5),

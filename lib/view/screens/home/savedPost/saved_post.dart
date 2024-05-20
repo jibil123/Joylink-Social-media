@@ -23,11 +23,11 @@ class SavedPostScreen extends StatelessWidget {
                 content: Text('Unsave successful'),
                 backgroundColor: AppColors.primaryColor,
               ));
-              context.read<SavePostBloc>().add(FetchPostSavedEvent());  // Fetch updated posts
+              context.read<SavePostBloc>().add(FetchPostSavedEvent());  // Fetchupdated posts
             }
           },
           builder: (context, state) {
-            if (state is loadingSavedState) {
+            if (state is LoadingSavedState) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is LoadedSavedPosts) {
               final savedPosts = state.savedPosts;

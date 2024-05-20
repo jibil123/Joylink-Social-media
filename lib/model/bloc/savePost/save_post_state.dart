@@ -21,6 +21,6 @@ final class LoadedSavedPosts extends SavePostState{
   LoadedSavedPosts({required this.savedPosts});
 }
 
-final class loadingSavedState extends SavePostState{}
+final class LoadingSavedState extends SavePostState{}
 
 final class UnSaveSuccessState extends SavePostState{}

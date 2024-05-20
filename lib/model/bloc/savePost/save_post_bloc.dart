@@ -33,8 +33,7 @@ class SavePostBloc extends Bloc<SavePostEvent, SavePostState> {
         }
       } catch (e) {
         emit(SaveFailedState());
-        print('hellow');
-        print(e.toString());
+        throw(e.toString());
       }
     });
     on<UnSavePostEvent>((event, emit) async {
@@ -43,18 +42,18 @@ class SavePostBloc extends Bloc<SavePostEvent, SavePostState> {
         await firebaseSavePost.unSavePost(event.id, currentUserId);
         emit(UnSaveSuccessState());
       } catch (e) {
-        print(e.toString());
+        throw(e.toString());
       }
     });
 
     on<FetchPostSavedEvent>((event, emit) async {
-      emit(loadingSavedState());
+      emit(LoadingSavedState());
       try {
         final String currentUserId = firebaseAuth.currentUser!.uid;
         final datas = await firebaseSavePost.getSavedPosts(currentUserId);
         emit(LoadedSavedPosts(savedPosts: datas));
       } catch (e) {
-        print(e.toString());
+        throw(e.toString());
       }
     });
   }

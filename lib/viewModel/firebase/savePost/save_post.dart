@@ -39,14 +39,13 @@ class FirebaseSavePost {
 
   Future<void> unSavePost(String postId, String userId) async {
     try {
-      var snapshot = await _firebaseFirestore
+       await _firebaseFirestore
           .collection('saved users')
           .doc(userId)
           .collection('saved post')
           .doc(postId).delete();
-      print('hello');
     } catch (e) {
-      print(e.toString());
+      throw(e.toString());
     }
   }
 }

@@ -12,6 +12,7 @@ import 'package:joylink/model/bloc/googleAuthBloc/google_auth_bloc.dart';
 import 'package:joylink/model/bloc/authBloc/bloc/auth_bloc.dart';
 import 'package:joylink/model/bloc/profilePhoto/profile_photo_bloc.dart';
 import 'package:joylink/model/bloc/savePost/save_post_bloc.dart';
+import 'package:joylink/model/bloc/userSearchBloc/user_search_bloc.dart';
 import 'package:joylink/view/screens/splash/splash_screen.dart';
 import 'package:joylink/viewModel/firebase/fetchData/fetch_post_data.dart';
 
@@ -66,6 +67,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ThemeBloc(),
+        ),
+        BlocProvider(
+          create: (context) => UserSearchBloc(),
         )
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
