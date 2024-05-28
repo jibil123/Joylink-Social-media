@@ -20,3 +20,10 @@ final class LikeCommentError extends LikeCommentState{
 
   LikeCommentError({required this.error});
 }
+
+final class LikeAdded extends LikeCommentState{
+  final bool isLiked;
+  final int likeCount;
+
+  LikeAdded({required this.isLiked, required this.likeCount});
+}

@@ -49,7 +49,9 @@ class ProfileInfo extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Text(
                         bio != null ? "Bio     : $bio" : "Bio     : Null",
                         style: const TextStyle(
@@ -69,12 +71,11 @@ class ProfileInfo extends StatelessWidget {
                         builder: (context) => const ProfileEditScreen(),
                       )),
                       child: Container(
-                        width: 100,
+                        width: 120,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(5),
+                          color: AppColors.tealColor,
                         ),
-                        height: 25,
                         child: const Center(
                           child: Text(
                             'Edit',
@@ -88,17 +89,18 @@ class ProfileInfo extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     GestureDetector(
-                      onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>  UserPosts(),
-                      ));
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => UserPosts(
+                            deleteOrSave: true,
+                          ),
+                        ));
                       },
                       child: Container(
                         width: 120,
-                        height: 30,
                         decoration: BoxDecoration(
-                            color: AppColors.primaryColor,
-                            borderRadius: BorderRadius.circular(20)),
+                            color: AppColors.tealColor,
+                            borderRadius: BorderRadius.circular(5)),
                         child: const Center(
                           child: Text(
                             'Activities',

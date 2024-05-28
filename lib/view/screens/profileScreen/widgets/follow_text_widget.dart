@@ -1,8 +1,7 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:joylink/utils/colors.dart';
 
-Uint8List? selectedImage;
+// Uint8List? selectedImage;
 Widget followFunction(String text) {
   return Container(
     width: 150,

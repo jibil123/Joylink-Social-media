@@ -68,4 +68,15 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+     // Add the App Check dependency
+    implementation 'com.google.firebase:firebase-appcheck:16.0.0'
+    // Add the provider you are using, e.g., Play Integrity or SafetyNet
+    implementation 'com.google.firebase:firebase-appcheck-playintegrity:16.0.0'
+    // or for SafetyNet
+    implementation 'com.google.firebase:firebase-appcheck-safetynet:16.0.0'
+
+    implementation 'com.google.android.gms:play-services-basement:18.0.0'
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+
+}

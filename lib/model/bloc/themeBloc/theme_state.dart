@@ -6,5 +6,5 @@ part of 'theme_bloc.dart';
 }
 
  class ThemeInitial extends ThemeState {
-  ThemeInitial():super(isSwitched: false); 
+  ThemeInitial():super(isSwitched: true); 
 }

@@ -7,8 +7,7 @@ class LikeAndCommentButtons extends StatelessWidget {
   final int likeCount;
   final int commentCount;
 
-  const LikeAndCommentButtons({
-    super.key, 
+  const LikeAndCommentButtons({super.key, 
     required this.onLike,
     required this.onComment,
     required this.isLiked,
@@ -19,9 +18,9 @@ class LikeAndCommentButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+      padding: const EdgeInsets.only(right: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+       
         children: [
           Row(
             children: [
@@ -32,29 +31,17 @@ class LikeAndCommentButtons extends StatelessWidget {
                 ),
                 onPressed: onLike,
               ),
-              Text(
-                '$likeCount',
-                style: TextStyle(
-                  color: isLiked ? Colors.red : Colors.grey,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Text('$likeCount'),
             ],
           ),
-          const SizedBox(width: 20),
+          const SizedBox(width: 10,),
           Row(
             children: [
               IconButton(
                 icon: const Icon(Icons.comment, color: Colors.grey),
                 onPressed: onComment,
               ),
-              Text(
-                '$commentCount',
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Text('$commentCount'),
             ],
           ),
         ],

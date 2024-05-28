@@ -19,95 +19,105 @@ class CommentBottomSheet extends StatelessWidget {
     return Padding(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: Column(
-        children: [
-          Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: _firebaseFirestore
-                  .collection('user post')
-                  .doc(postId)
-                  .collection('comments')
-                  .orderBy('timestamp', descending: true)
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return Center(child: Text('No comments yet'));
-                }
-                return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    var commentData = snapshot.data!.docs[index].data()
-                        as Map<String, dynamic>;
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(commentData['userProfileImage']),
-                      ),
-                      title: Text(commentData['userName']),
-                      subtitle: Text(commentData['text']),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-          Divider(height: 1),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _commentController,
-                  decoration: InputDecoration(
-                    hintText: 'Add a comment...',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              IconButton(
-                icon: Icon(Icons.send),
-                onPressed: () async {
-                  if (_commentController.text.trim().isEmpty) {
-                    return;
+      child: Container(
+        height: MediaQuery.of(context).size.height *
+            0.5, // Adjust the height as needed
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: _firebaseFirestore
+                    .collection('user post')
+                    .doc(postId)
+                    .collection('comments')
+                    .orderBy('timestamp', descending: true)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
                   }
-                
-                  User? currentUser = FirebaseAuth.instance.currentUser;
-                  if (currentUser != null) {
-                    DocumentSnapshot userDetailsSnapshot =
-                        await _firebaseFirestore
-                            .collection('user details')
-                            .doc(currentUser.uid)
-                            .get();
-                    if (userDetailsSnapshot.exists) {
-                      String userName = userDetailsSnapshot['name'];
-                      String userProfileImage =
-                          userDetailsSnapshot['imageUrl'];
-                
-                      _firebaseFirestore
-                          .collection('user post')
-                          .doc(postId)
-                          .collection('comments')
-                          .add({
-                        'text': _commentController.text.trim(),
-                        'user': FirebaseAuth.instance.currentUser!.uid,
-                        'userName': userName,
-                        'userProfileImage': userProfileImage,
-                        'timestamp': FieldValue.serverTimestamp(),
-                      });
-                      _commentController.clear();
-                      likeCommandBloc
-                          .add(LoadLikeCommentEvent(postId: postId));
-                    }
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    return const Center(child: Text('No comments yet'));
                   }
+                  return ListView.builder(
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      var commentData = snapshot.data!.docs[index].data()
+                          as Map<String, dynamic>;
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage:
+                              NetworkImage(commentData['userProfileImage']),
+                        ),
+                        title: Text(commentData['userName']),
+                        subtitle: Text(commentData['text']),
+                      );
+                    },
+                  );
                 },
               ),
-            ],
-          ),
-        ],
+            ),
+            const Divider(height: 1),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _commentController,
+                      decoration: InputDecoration(
+                        hintText: 'Add a comment...',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.send),
+                    onPressed: () async {
+                      if (_commentController.text.trim().isEmpty) {
+                        return;
+                      }
+
+                      User? currentUser = FirebaseAuth.instance.currentUser;
+                      if (currentUser != null) {
+                        DocumentSnapshot userDetailsSnapshot =
+                            await _firebaseFirestore
+                                .collection('user details')
+                                .doc(currentUser.uid)
+                                .get();
+                        if (userDetailsSnapshot.exists) {
+                          String userName = userDetailsSnapshot['name'];
+                          String userProfileImage =
+                              userDetailsSnapshot['imageUrl'];
+
+                          _firebaseFirestore
+                              .collection('user post')
+                              .doc(postId)
+                              .collection('comments')
+                              .add({
+                            'text': _commentController.text.trim(),
+                            'user': FirebaseAuth.instance.currentUser!.uid,
+                            'userName': userName,
+                            'userProfileImage': userProfileImage,
+                            'timestamp': FieldValue.serverTimestamp(),
+                          });
+                                   _commentController.clear();
+                      likeCommandBloc.add(LoadLikeCommentEvent(postId: postId));
+                        }
+                      }
+
+             
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

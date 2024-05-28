@@ -43,7 +43,7 @@ class LikeCommentBloc extends Bloc<LikeCommentEvent, LikeCommentState> {
     }
   }
 
-  Future<void> _onToggleLike(ToggleLikeEvent event, Emitter<LikeCommentState> emit) async {
+    Future<void> _onToggleLike(ToggleLikeEvent event, Emitter<LikeCommentState> emit) async {
     try {
       User? user = _auth.currentUser;
       if (user == null) {
@@ -60,13 +60,12 @@ class LikeCommentBloc extends Bloc<LikeCommentEvent, LikeCommentState> {
       } else {
         await likeRef.set(<String, dynamic>{});
       }
-      // Reload the likes and comments after toggling the like
+     
       add(LoadLikeCommentEvent(postId: event.postId));
     } catch (e) {
       emit(LikeCommentError(error: e.toString()));
     }
   }
-
   Future<void> _onAddComment(AddCommentEvent event, Emitter<LikeCommentState> emit) async {
     try {
       User? user = _auth.currentUser;

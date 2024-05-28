@@ -6,7 +6,8 @@ import 'package:joylink/utils/media_quary.dart';
 import 'package:joylink/viewModel/date_and_time/date_and_time.dart';
 
 class UserPosts extends StatelessWidget {
-  UserPosts({super.key});
+  UserPosts({super.key, required this.deleteOrSave});
+  final bool deleteOrSave;
   final DateAndTime dateAndTime = DateAndTime();
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,8 @@ class UserPosts extends StatelessWidget {
                           ),
                           title: Text(user.name),
                           subtitle: Text(post.location),
-                          trailing: PopupMenuButton(
+                          trailing:deleteOrSave?
+                           PopupMenuButton(
                             itemBuilder: (context) => [
                               const PopupMenuItem(
                                 value: 'delete',
@@ -69,7 +71,7 @@ class UserPosts extends StatelessWidget {
                                     .add(DeletePostEvent(postId: post.postId));
                               }
                             },
-                          ),
+                          ):null,
                         ),
                         Container(
                           decoration: const BoxDecoration(

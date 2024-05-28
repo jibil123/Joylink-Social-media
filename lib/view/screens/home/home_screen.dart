@@ -4,6 +4,7 @@ import 'package:joylink/model/bloc/PostFetchBloc/post_bloc.dart';
 import 'package:joylink/model/bloc/savePost/save_post_bloc.dart';
 import 'package:joylink/model/model/saved_post_model.dart';
 import 'package:joylink/utils/colors.dart';
+import 'package:joylink/view/screens/chatScreen/chat_list.dart';
 import 'package:joylink/view/screens/home/post_details.dart';
 import 'package:joylink/view/screens/home/savedPost/saved_post.dart';
 
@@ -45,12 +46,14 @@ class HomeScreen extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>  SavedPostScreen(isSaved: isSaved,)));
+                      builder: (context) =>  SavedPostScreen(isSaved: isSaved,))); 
                 },
                 icon: const Icon(Icons.save)),
             Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: IconButton(onPressed: () {}, icon: const Icon(Icons.chat)),
+              child: IconButton(onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChatListScreen()));
+              }, icon: const Icon(Icons.chat)),
             )
           ],
         ),
@@ -76,6 +79,10 @@ class HomeScreen extends StatelessWidget {
                   final user =
                       users.firstWhere((user) => user.userId == post.userId);
                   SavedPostModel savedPostModel = SavedPostModel(
+                    mail: user.mail,
+                    bio: user.bio,
+                    coverImage: user.coverImage,
+                    uid: user.userId,
                       name: user.name,
                       profileImage: user.profilePic,
                       location: post.location,

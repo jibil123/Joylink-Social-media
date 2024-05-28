@@ -22,8 +22,7 @@ class ProfilePhotoScreen extends StatelessWidget {
               children: [
               followFunction('Following 541'),
                 const SizedBox(height: 10),
-              followFunction('Followers 30'),
-              
+              followFunction('Followers 30'),              
               ],
             ),
           ),

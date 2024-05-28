@@ -1,12 +1,12 @@
 part of 'user_search_bloc.dart';
 
 @immutable
-abstract class UserSearchEvent {}
+abstract class SearchQueryEvent {}
 
-class FetchUsersEvent extends UserSearchEvent {}
+class FetchUsersEvent extends SearchQueryEvent {}
 
-class SearchUsersEvent extends UserSearchEvent {
+class UpdateSearchQuery extends SearchQueryEvent {
   final String query;
 
-  SearchUsersEvent(this.query);
+  UpdateSearchQuery(this.query);
 }
