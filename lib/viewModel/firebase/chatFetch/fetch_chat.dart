@@ -7,6 +7,7 @@ class FetchChat {
     ids.sort();
     String chatRoomId = ids.join("_");
     return firebaseFirestore
+        // .collection('users').doc(userId)
         .collection('chat_rooms')
         .doc(chatRoomId)
         .collection('messages')

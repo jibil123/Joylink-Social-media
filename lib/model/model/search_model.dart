@@ -5,7 +5,11 @@ class UserModel {
   final String imageUrl;
   final String coverImage;
   final String bio;
+  final List<String> followers;
+  final List<String> following;
   UserModel({
+    required this.followers,
+    required this.following,
     required this.coverImage,
     required this.id,
     required this.name,
@@ -16,12 +20,14 @@ class UserModel {
 
   factory UserModel.fromFirestore(Map<String, dynamic> data) {
     return UserModel(
+      followers: List<String>.from(data['followers'] ?? []),
+      following: List<String>.from(data['following'] ?? []),
       id: data['id'],
       name: data['name'] ?? '',
       mail: data['mail'] ?? '',
       imageUrl: data['imageUrl'] ?? '',
-      coverImage: data['coverImage']??'',
-      bio: data['bio']??'',
+      coverImage: data['coverImage'] ?? '',
+      bio: data['bio'] ?? '',
     );
   }
 }

@@ -9,8 +9,8 @@ import 'package:joylink/view/screens/home/post_details.dart';
 import 'package:joylink/view/screens/home/savedPost/saved_post.dart';
 
 class HomeScreen extends StatelessWidget {
-   const HomeScreen({super.key});
-  final bool isSaved=false;
+  const HomeScreen({super.key});
+  final bool isSaved = false;
   @override
   Widget build(BuildContext context) {
     final postSavebloc = BlocProvider.of<SavePostBloc>(context);
@@ -27,13 +27,11 @@ class HomeScreen extends StatelessWidget {
             content: Text('Failed to save post'),
             backgroundColor: AppColors.redColor,
           ));
-        }
-         else if (state is PostAlreadySavedState) {
+        } else if (state is PostAlreadySavedState) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('already saved'),
             backgroundColor: AppColors.orangeColor,
           ));
-          
         }
       },
       child: Scaffold(
@@ -46,14 +44,19 @@ class HomeScreen extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>  SavedPostScreen(isSaved: isSaved,))); 
+                      builder: (context) => SavedPostScreen(
+                            isSaved: isSaved,
+                          )));
                 },
                 icon: const Icon(Icons.save)),
             Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: IconButton(onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChatListScreen()));
-              }, icon: const Icon(Icons.chat)),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const ChatListScreen()));
+                  },
+                  icon: const Icon(Icons.chat)),
             )
           ],
         ),
@@ -79,10 +82,12 @@ class HomeScreen extends StatelessWidget {
                   final user =
                       users.firstWhere((user) => user.userId == post.userId);
                   SavedPostModel savedPostModel = SavedPostModel(
-                    mail: user.mail,
-                    bio: user.bio,
-                    coverImage: user.coverImage,
-                    uid: user.userId,
+                      followers: user.followers,
+                      following: user.following,
+                      mail: user.mail,
+                      bio: user.bio,
+                      coverImage: user.coverImage,
+                      uid: user.userId,
                       name: user.name,
                       profileImage: user.profilePic,
                       location: post.location,
@@ -93,7 +98,10 @@ class HomeScreen extends StatelessWidget {
                   return Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    child: UsersPostCard(savedPostModel: savedPostModel,isSaveOrNot: true,),
+                    child: UsersPostCard(
+                      savedPostModel: savedPostModel,
+                      isSaveOrNot: true,
+                    ),
                   );
                 },
               );

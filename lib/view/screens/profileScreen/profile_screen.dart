@@ -7,12 +7,12 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const Scaffold(
+    return   Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
            ProfilePhotoScreen(),
-           Padding(
+           const Padding(
             padding: EdgeInsets.only(left: 20, right: 20),
             child: ProfileInfo(),
           ),
@@ -24,3 +24,4 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
+

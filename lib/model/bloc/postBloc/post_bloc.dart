@@ -70,13 +70,13 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
   Future< void> onAddLocation(
       AddLocationEvent event, Emitter<PostState> emit) async {
-        emit(PostLoadingState());
     try {
       final LocationService locationService = LocationService();
       Placemark? currentLocationName;
       Position? currentposition;
       PermissionStatus permissionStatus = await Permission.location.request();
       if(permissionStatus.isGranted){
+       
          currentposition = await Geolocator.getCurrentPosition();
       currentLocationName =
           await locationService.getLocationName(currentposition);

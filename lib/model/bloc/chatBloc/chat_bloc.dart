@@ -15,16 +15,45 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     final FirebaseAuth firebaseAth = FirebaseAuth.instance;
     final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     final String currentUser = firebaseAth.currentUser!.uid;
+    final String receiverId = event.reciverId;
     final Timestamp timestamp = Timestamp.now();
-    Message newmessage = Message(
+    Message newMessage = Message(
         senterId: currentUser,
         receiverId: event.reciverId,
         message: event.message,
         timestamp: timestamp);
-        List<String>ids=[currentUser,event.reciverId];
-        ids.sort();
-        String chatRoomId=ids.join("_");
+    List<String> ids = [currentUser, event.reciverId];
+    ids.sort();
+    String chatRoomId = ids.join("_");
 
-        await firebaseFirestore.collection('chat_rooms').doc(chatRoomId).collection('messages').add(newmessage.toMap());
+    await firebaseFirestore
+        .collection('chat_rooms')
+        .doc(chatRoomId)
+        .collection('messages')
+        .add(newMessage.toMap());
+
+    await firebaseFirestore
+        .collection('users')
+        .doc(currentUser)
+        .collection('chats')
+        .doc(chatRoomId)
+        .set({
+      'receiverId': receiverId,
+      'lastMessage': event.message,
+      'timestamp': Timestamp.now(),
+    });
+
+
+    // Also add the message to the receiver's chat messages
+    await firebaseFirestore
+        .collection('users')
+        .doc(receiverId)
+        .collection('chats')
+        .doc(chatRoomId)
+        .set({
+      'receiverId': currentUser,
+      'lastMessage': event.message,
+      'timestamp': Timestamp.now(),
+    });
   }
 }

@@ -78,6 +78,8 @@ class UserSearchView extends StatelessWidget {
                           imageUrl: imageUrl,
                           coverImage: coverImage,
                           bio: bio,
+                          followers: user['followers'],
+                          following: user['following']
                           );
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>

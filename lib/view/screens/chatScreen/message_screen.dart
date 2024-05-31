@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:joylink/model/bloc/chatBloc/chat_bloc.dart';
 import 'package:joylink/view/screens/authScreen/utils/customtextformfield.dart';
 import 'package:joylink/view/screens/chatScreen/bubble_chat_screen.dart';
@@ -82,6 +83,12 @@ class ChatScreen extends StatelessWidget {
     var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
         ? Alignment.centerRight
         : Alignment.centerLeft;
+
+        // Get the timestamp and format it
+  Timestamp timestamp = data['timeStamp'];
+  DateTime dateTime = timestamp.toDate();
+  String formattedTime = DateFormat('h:mm a').format(dateTime); // Using intl package
+  
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Container(
@@ -95,7 +102,7 @@ class ChatScreen extends StatelessWidget {
               (data['senderId'] == _firebaseAuth.currentUser!.uid)
                   ? MainAxisAlignment.end
                   : MainAxisAlignment.start,
-          children: [ChatBubbleScreen(message: data['message'])],
+          children: [ChatBubbleScreen(message: data['message'],time: formattedTime)],
         ),
       ),
     );

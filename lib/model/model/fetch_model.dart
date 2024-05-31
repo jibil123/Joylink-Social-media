@@ -5,8 +5,11 @@ class User {
   final String name;
   final String profilePic;
   final String mail;
-
+  final List<String> followers;
+  final List<String> following;
   User({
+    required this.followers,
+    required this.following,
     required this.mail,
     required this.bio,
     required this.coverImage,
@@ -17,12 +20,14 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> data, String documentId) {
     return User(
+      followers: List<String>.from(data['followers'] ?? []),
+      following: List<String>.from(data['following'] ?? []),
       userId: documentId,
-      mail: data['mail']??'',
+      mail: data['mail'] ?? '',
       name: data['name'] ?? '',
       profilePic: data['imageUrl'] ?? '',
-      bio: data['bio']??'',
-      coverImage: data['coverImage']??'',
+      bio: data['bio'] ?? '',
+      coverImage: data['coverImage'] ?? '',
     );
   }
 }
@@ -45,8 +50,8 @@ class UserPost {
 
   factory UserPost.fromMap(Map<String, dynamic> data, String documentId) {
     return UserPost(
-      dateAndTime:data['time']??'',
-      location: data['location']??'',
+      dateAndTime: data['time'] ?? '',
+      location: data['location'] ?? '',
       postId: documentId,
       userId: data['uid'] ?? '',
       image: data['photoUrl'] ?? '',

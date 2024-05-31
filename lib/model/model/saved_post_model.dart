@@ -10,12 +10,16 @@ class SavedPostModel {
   final String bio;
   final String coverImage;
   final String mail;
+  final List<String> followers;
+  final List<String> following;
 
   SavedPostModel(
-      {required this.mail,
-        required this.uid,
+      {required this.followers,
+      required this.following,
+      required this.mail,
+      required this.uid,
       required this.bio,
-      required this.coverImage,  
+      required this.coverImage,
       required this.postId,
       required this.name,
       required this.profileImage,
@@ -26,16 +30,18 @@ class SavedPostModel {
 
   factory SavedPostModel.fromMap(Map<String, dynamic> data, String documentId) {
     return SavedPostModel(
+        followers: List<String>.from(data['followers'] ?? []),
+        following: List<String>.from(data['following'] ?? []),
         postId: documentId,
-        mail: data['mail']??'',
-        uid: data['uid']??'',
-        name: data['name']??'',
-        profileImage:data['profileImage'] ??'',
-        location:data['location']?? '',
-        postImage:data['postImage']?? '',
-        date: data['date']??'',
-        description:data['description']?? '',
-        bio: data['bio']??'',
-        coverImage: data['coverImage']??'');
+        mail: data['mail'] ?? '',
+        uid: data['uid'] ?? '',
+        name: data['name'] ?? '',
+        profileImage: data['profileImage'] ?? '',
+        location: data['location'] ?? '',
+        postImage: data['postImage'] ?? '',
+        date: data['date'] ?? '',
+        description: data['description'] ?? '',
+        bio: data['bio'] ?? '',
+        coverImage: data['coverImage'] ?? '');
   }
 }

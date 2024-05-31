@@ -50,10 +50,10 @@ class OtherProfileUserDetails extends StatelessWidget {
                   builder: (context)=> ChatScreen(reciverId:userModel.id,),
                 )),
                 child: Container(
-                  width: 110,
+                  width: 120,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColors.tealColor,
                   ),
                  
                   child: const Center(
@@ -75,10 +75,10 @@ class OtherProfileUserDetails extends StatelessWidget {
                   ));
                 },
                 child: Container(
-                  width: 110,
+                  width: 120,
                   decoration: BoxDecoration(
-                      color: AppColors.primaryColor,
-                      borderRadius: BorderRadius.circular(20)),
+                      color: AppColors.tealColor,
+                      borderRadius: BorderRadius.circular(5)),
                   child: const Center(
                     child: Text(
                       'Activities',
