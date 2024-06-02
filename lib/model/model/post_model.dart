@@ -15,5 +15,4 @@ class PostModel {
       this.id,
       this.location,});
 
- 
 }

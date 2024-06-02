@@ -100,7 +100,7 @@ class UsersPostCard extends StatelessWidget {
                       BorderRadius.vertical(bottom: Radius.circular(15)),
                 ),
                 child: Image.network(
-                  savedPostModel.postImage,
+                  savedPostModel.postImage,fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
                     double? progress =

@@ -51,11 +51,7 @@ class PostScreen extends StatelessWidget {
         if (state is PostLoadingState) {
           return const Center(child: CircularProgressIndicator());
         } else {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('Upload'),
-            ),
-            body: Padding(
+          return  Padding(
               padding: const EdgeInsets.all(15),
               child: SingleChildScrollView(
                 child: Form(
@@ -108,8 +104,7 @@ class PostScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-          );
+            );
         }
       },
     );

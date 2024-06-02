@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:joylink/view/screens/home/home_screen.dart';
-import 'package:joylink/view/screens/postScreen/post_screen.dart';
+import 'package:joylink/view/screens/home/widgets/main_home.tab_bar.dart';
+import 'package:joylink/view/screens/postScreen/upload_screen.dart';
 import 'package:joylink/view/screens/profileScreen/profile_screen.dart';
 import 'package:joylink/view/screens/search/search_screen.dart';
 import 'package:joylink/view/screens/settingsScreen/setttings_screen.dart';
 
 List<Widget> tabs = [
-  const HomeScreen(),
+  const MainHome(),
   const UserSearchScreen(),
-  PostScreen(),
+  const UploadScreen(),
   const SettingScreen(),
   const ProfileScreen()
 ];

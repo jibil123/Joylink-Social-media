@@ -4,9 +4,7 @@ import 'package:joylink/model/bloc/PostFetchBloc/post_bloc.dart';
 import 'package:joylink/model/bloc/savePost/save_post_bloc.dart';
 import 'package:joylink/model/model/saved_post_model.dart';
 import 'package:joylink/utils/colors.dart';
-import 'package:joylink/view/screens/chatScreen/chat_list.dart';
 import 'package:joylink/view/screens/home/post_details.dart';
-import 'package:joylink/view/screens/home/savedPost/saved_post.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,33 +32,35 @@ class HomeScreen extends StatelessWidget {
           ));
         }
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Home',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SavedPostScreen(
-                            isSaved: isSaved,
-                          )));
-                },
-                icon: const Icon(Icons.save)),
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const ChatListScreen()));
-                  },
-                  icon: const Icon(Icons.chat)),
-            )
-          ],
-        ),
-        body: BlocConsumer<PostFetchBloc, PostFetchState>(
+      child:
+      //  Scaffold(
+        // appBar: AppBar(
+        //   title: const Text(
+        //     'Home',
+        //     style: TextStyle(fontWeight: FontWeight.bold),
+        //   ),
+        //   actions: [
+        //     IconButton(
+        //         onPressed: () {
+        //           Navigator.of(context).push(MaterialPageRoute(
+        //               builder: (context) => SavedPostScreen(
+        //                     isSaved: isSaved,
+        //                   )));
+        //         },
+        //         icon: const Icon(Icons.save)),
+        //     Padding(
+        //       padding: const EdgeInsets.only(right: 10),
+        //       child: IconButton(
+        //           onPressed: () {
+        //             Navigator.of(context).push(MaterialPageRoute(
+        //                 builder: (context) => const ChatListScreen()));
+        //           },
+        //           icon: const Icon(Icons.chat)),
+        //     )
+        //   ],
+        // ),
+        // body:
+         BlocConsumer<PostFetchBloc, PostFetchState>(
           listener: (context, state) {
             if (state is PostError) {
               const Text('error');
@@ -112,7 +112,7 @@ class HomeScreen extends StatelessWidget {
             }
           },
         ),
-      ),
-    );
+      );
+    // );
   }
 }

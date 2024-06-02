@@ -14,7 +14,7 @@ Widget followFunction(String label, int count) {
         const SizedBox(height: 5),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             color: Colors.black87,
           ),

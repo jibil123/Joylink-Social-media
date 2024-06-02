@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/cover_image.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/follow_text_widget.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/profile_photo.dart';
