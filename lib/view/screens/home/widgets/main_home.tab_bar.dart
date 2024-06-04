@@ -48,10 +48,10 @@ final bool isSaved = false;
             )
           ],
           ),
-          body: TabBarView(children: [
+          body: const TabBarView(children: [
             HomeScreen(),
             ReelScreen(),
-            const Center(child: Text('poll')),
+            Center(child: Text('poll')),
           ]),
         ));
   }

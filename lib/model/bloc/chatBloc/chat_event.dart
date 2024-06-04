@@ -9,3 +9,11 @@ class SendMessage extends ChatEvent{
 
   SendMessage({required this.reciverId, required this.message});
 }
+
+class SendMediaMessage extends ChatEvent {
+  final String reciverId;
+  final File file;
+  final String mediaType; // 'image' or 'video'
+
+  SendMediaMessage({required this.reciverId, required this.file, required this.mediaType});
+}

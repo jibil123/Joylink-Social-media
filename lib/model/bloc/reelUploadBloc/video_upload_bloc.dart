@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -38,7 +39,8 @@ class VideoUploadBloc extends Bloc<VideoUploadEvent, VideoUploadState> {
         });
         final snapshot = await uploadTask.whenComplete(() => {});
         final videoUrl = await snapshot.ref.getDownloadURL();
-       final userDetails=await userRepo.getUserData();
+        String uid = FirebaseAuth.instance.currentUser!.uid;
+       final userDetails=await userRepo.getUserData(uid);
         await FirebaseFirestore.instance.collection('videos').add({
           'url': videoUrl,
           'uploadedAt': Timestamp.now(),
@@ -46,7 +48,8 @@ class VideoUploadBloc extends Bloc<VideoUploadEvent, VideoUploadState> {
           'profile':userDetails?.profilePic,
           'name':userDetails?.name,
           'likes':[],
-          'description':event.description
+          'description':event.description,
+          'email':userDetails?.mail
         });
         emit(VideoUploaded());
         

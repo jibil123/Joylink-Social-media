@@ -5,19 +5,25 @@ class Message {
   final String receiverId;
   final String message;
   final Timestamp timestamp;
+   final String? mediaUrl; // Optional field for media URL
+  final String? mediaType;
 
   Message(
       {required this.senterId,
       required this.receiverId,
       required this.message,
-      required this.timestamp});
+      required this.timestamp,
+      this.mediaUrl,
+    this.mediaType,});
 
   Map<String, dynamic> toMap() {
     return {
       'senderId': senterId,
       'reciverId': receiverId,
       'message': message,
-      'timeStamp': timestamp
+      'timeStamp': timestamp,
+      'mediaUrl': mediaUrl,
+      'mediaType': mediaType,
     };
   }
 }

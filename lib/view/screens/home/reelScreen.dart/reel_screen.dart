@@ -25,10 +25,24 @@ class ReelScreen extends StatelessWidget {
             scrollDirection: Axis.vertical,
             itemCount: videos.length,
             itemBuilder: (context, index) {
-              final videoUrl = videos[index]['url'];
+              final videoData = videos[index].data() as Map<String, dynamic>;
+              final videoUrl = videoData['url'];
+              final userName = videoData['name'];
+              final profileImage = videoData['profile'];
+              final likes = List<String>.from(videoData['likes'] ?? []);
+              final description = videoData['description'];
+              final videoId = videos[index].id;
+              final uid=videoData['uid'];
               return BlocProvider(
                 create: (_) => VideoPlayerBloc(videoUrl),
-                child: const VideoPlayerWidget(),
+                child: VideoPlayerWidget(
+                  videoId: videoId,
+                  userName: userName,
+                  profileImage: profileImage,
+                  likes: likes,
+                  description: description,
+                  uid:uid,
+                ),
               );
             },
           );
@@ -37,4 +51,3 @@ class ReelScreen extends StatelessWidget {
     );
   }
 }
-
