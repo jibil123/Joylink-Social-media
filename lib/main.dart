@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/firebase_options.dart';
 import 'package:joylink/model/bloc/PostFetchBloc/post_bloc.dart';
 import 'package:joylink/model/bloc/chatBloc/chat_bloc.dart';
-import 'package:joylink/model/bloc/likeCommentBloc/like_comment_bloc.dart';
 import 'package:joylink/model/bloc/themeBloc/theme_bloc.dart';
 import 'package:joylink/model/bloc/postBloc/post_bloc.dart';
 import 'package:joylink/model/bloc/bottomNavigation/bottom_navigation_bloc.dart';
@@ -73,9 +72,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SearchQueryBloc(),
         ),
-                BlocProvider(
-          create: (context) => LikeCommentBloc(),
-        ),
+
         BlocProvider(
           create: (context) => ChatBloc(),
         )

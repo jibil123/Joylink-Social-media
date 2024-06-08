@@ -47,7 +47,7 @@ class ProfilePhoto extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.whiteColor, width: 5),
+                    border: Border.all(color:Colors.black54, width: 5),
                   ),
                   child: imageUrl != null
                       ? CircleAvatar(

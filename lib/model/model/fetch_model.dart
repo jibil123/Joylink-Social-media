@@ -1,4 +1,4 @@
-class User {
+class Users {
   final String userId;
   final String bio;
   final String coverImage;
@@ -7,7 +7,7 @@ class User {
   final String mail;
   final List<String> followers;
   final List<String> following;
-  User({
+  Users({
     required this.followers,
     required this.following,
     required this.mail,
@@ -18,8 +18,8 @@ class User {
     required this.profilePic,
   });
 
-  factory User.fromMap(Map<String, dynamic> data, String documentId) {
-    return User(
+  factory Users.fromMap(Map<String, dynamic> data, String documentId) {
+    return Users(
       followers: List<String>.from(data['followers'] ?? []),
       following: List<String>.from(data['following'] ?? []),
       userId: documentId,
@@ -31,7 +31,6 @@ class User {
     );
   }
 }
-
 class UserPost {
   final String postId;
   final String userId;
@@ -39,6 +38,10 @@ class UserPost {
   final String description;
   final String location;
   final String dateAndTime;
+  
+  int likesCount;
+  int commentsCount;
+
   UserPost({
     required this.dateAndTime,
     required this.location,
@@ -46,6 +49,8 @@ class UserPost {
     required this.userId,
     required this.image,
     required this.description,
+    this.likesCount = 0,
+    this.commentsCount = 0,
   });
 
   factory UserPost.fromMap(Map<String, dynamic> data, String documentId) {
@@ -56,6 +61,8 @@ class UserPost {
       userId: data['uid'] ?? '',
       image: data['photoUrl'] ?? '',
       description: data['description'] ?? '',
+      likesCount: data['likesCount'] ?? 0,  // Ensure these fields exist in your Firestore documents
+      commentsCount: data['commentsCount'] ?? 0,  // Ensure these fields exist in your Firestore documents
     );
   }
 }

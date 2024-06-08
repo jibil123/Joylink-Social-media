@@ -11,11 +11,7 @@ class UserPosts extends StatelessWidget {
   final DateAndTime dateAndTime = DateAndTime();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('user Posts'),
-      ),
-      body: BlocConsumer<PostFetchBloc, PostFetchState>(
+    return  BlocConsumer<PostFetchBloc, PostFetchState>(
         listener: (context, state) {
           if (state is PostError) {
             const Text('error');
@@ -28,8 +24,8 @@ class UserPosts extends StatelessWidget {
             final users = state.users;
             final posts = state.sortedPosts;
             final currentUserId = FirebaseAuth.instance.currentUser
-                ?.uid; // Replace with the actual current user ID
-
+                ?.uid;
+                 // Replace with the actual current user ID
             // Filter the posts list to include only posts by the current user
             final currentUserPosts =
                 posts.where((post) => post.userId == currentUserId).toList();
@@ -39,6 +35,8 @@ class UserPosts extends StatelessWidget {
             }
 
             return ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
               itemCount: currentUserPosts.length,
               itemBuilder: (context, index) {
                 final post = currentUserPosts[index];
@@ -120,7 +118,6 @@ class UserPosts extends StatelessWidget {
             return const SizedBox();
           }
         },
-      ),
-    );
+      );
   }
 }

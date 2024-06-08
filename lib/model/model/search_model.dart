@@ -5,8 +5,8 @@ class UserModel {
   final String imageUrl;
   final String coverImage;
   final String bio;
-  final List<String> followers;
-  final List<String> following;
+  final List<dynamic> followers;
+  final List<dynamic> following;
   UserModel({
     required this.followers,
     required this.following,

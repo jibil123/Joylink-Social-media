@@ -50,6 +50,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         'photoUrl': downloadURL,
         'location':postModel.location,
         'time': dateOnly,
+        'likes':[],
       });
       postModel.id=null;
       postModel.location=null;
@@ -67,7 +68,6 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     postModel.description='';
     emit(PostCanceledState());
   }
-
   Future< void> onAddLocation(
       AddLocationEvent event, Emitter<PostState> emit) async {
     try {

@@ -99,7 +99,7 @@ class VideoPlayerWidget extends StatelessWidget {
                       color: isLiked ? Colors.red : Colors.white,
                     ),
                     onPressed: () {
-                      toggleLike(context, currentUser?.uid,likes,videoId);
+                        toggleLike(context, currentUser?.uid,likes,videoId);
                     },
                   ),
                   Text(

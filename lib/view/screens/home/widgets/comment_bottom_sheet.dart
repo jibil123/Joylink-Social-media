@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:joylink/model/bloc/likeCommentBloc/like_comment_bloc.dart';
 
 class CommentBottomSheet extends StatelessWidget {
   final String postId;
@@ -15,7 +13,7 @@ class CommentBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final likeCommandBloc = BlocProvider.of<LikeCommentBloc>(context);
+    // final likeCommandBloc = BlocProvider.of<LikeCommentBloc>(context);
     return Padding(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -106,11 +104,9 @@ class CommentBottomSheet extends StatelessWidget {
                             'timestamp': FieldValue.serverTimestamp(),
                           });
                                    _commentController.clear();
-                      likeCommandBloc.add(LoadLikeCommentEvent(postId: postId));
+                      // likeCommandBloc.add(LoadLikeCommentEvent(postId: postId));
                         }
-                      }
-
-             
+                      }         
                     },
                   ),
                 ],

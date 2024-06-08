@@ -33,33 +33,6 @@ class HomeScreen extends StatelessWidget {
         }
       },
       child:
-      //  Scaffold(
-        // appBar: AppBar(
-        //   title: const Text(
-        //     'Home',
-        //     style: TextStyle(fontWeight: FontWeight.bold),
-        //   ),
-        //   actions: [
-        //     IconButton(
-        //         onPressed: () {
-        //           Navigator.of(context).push(MaterialPageRoute(
-        //               builder: (context) => SavedPostScreen(
-        //                     isSaved: isSaved,
-        //                   )));
-        //         },
-        //         icon: const Icon(Icons.save)),
-        //     Padding(
-        //       padding: const EdgeInsets.only(right: 10),
-        //       child: IconButton(
-        //           onPressed: () {
-        //             Navigator.of(context).push(MaterialPageRoute(
-        //                 builder: (context) => const ChatListScreen()));
-        //           },
-        //           icon: const Icon(Icons.chat)),
-        //     )
-        //   ],
-        // ),
-        // body:
          BlocConsumer<PostFetchBloc, PostFetchState>(
           listener: (context, state) {
             if (state is PostError) {
@@ -82,6 +55,8 @@ class HomeScreen extends StatelessWidget {
                   final user =
                       users.firstWhere((user) => user.userId == post.userId);
                   SavedPostModel savedPostModel = SavedPostModel(
+                      likesCount: post.likesCount,
+                      commentsCount: post.commentsCount,
                       followers: user.followers,
                       following: user.following,
                       mail: user.mail,

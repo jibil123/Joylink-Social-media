@@ -61,10 +61,6 @@ class CreateLoginScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Create account',
-                    style: TextStyle(fontSize: 20),
-                  ),
                   const SizedBox(
                     height: 15,
                   ),

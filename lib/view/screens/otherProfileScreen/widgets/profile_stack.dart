@@ -88,16 +88,19 @@ class OtherProfileStack extends StatelessWidget {
                     top: 255, // Adjusted top position
                     right: 10, // Adjusted right position
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         followFunction('Following ',following.length),
                         const SizedBox(height: 10),
-                        followFunction('Followers ',follow.length),
-                        BlocBuilder<FollowBloc, FollowState>(
+                        Row(
+                          children: [
+                             BlocBuilder<FollowBloc, FollowState>(
                           builder: (context, state) { 
                             return ElevatedButton(
+                            
                               onPressed: () {
-                                if (follow
+                                
+                                if (follow 
                                     .contains(firebaseAuth.currentUser!.uid)) {
                                   context.read<FollowBloc>().add(
                                       UnfollowUserEvent(
@@ -115,8 +118,13 @@ class OtherProfileStack extends StatelessWidget {
                                       ? 'Unfollow'
                                       : 'Follow'),
                             );
+                            
                           },
                         ),
+                            followFunction('Followers ',follow.length),
+                          ],
+                        ),
+                       
                       ],
                     ),
                   );

@@ -12,7 +12,7 @@ final firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 400, // Set the height of the container
+      height: 380, // Set the height of the container
       child: Stack(
         children: [
           const CoverImage(),
@@ -31,7 +31,7 @@ final firestore = FirebaseFirestore.instance;
                   final following = (data?['following'] as List?) ?? [];
 
                   return Positioned(
-                    top: 265, // Adjusted top position
+                    top: 260, // Adjusted top position
                     right: 40, // Adjusted right position
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

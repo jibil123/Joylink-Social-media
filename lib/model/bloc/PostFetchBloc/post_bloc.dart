@@ -12,10 +12,8 @@ class PostFetchBloc extends Bloc<PostFetchEvent, PostFetchState> {
     on<FetchPostsEvent>((event, emit) async {
       emit(PostLoading());
       try {
-        final users = await repository.getUsers();
+       final users = await repository.getUsers();
         final posts = await repository.getUserPosts();
-        
-        posts.sort((a, b) => b.dateAndTime.compareTo(a.dateAndTime));
         emit(PostLoaded(users, posts));
       } catch (e) {
         emit(PostError(e.toString()));

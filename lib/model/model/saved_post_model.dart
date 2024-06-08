@@ -12,9 +12,13 @@ class SavedPostModel {
   final String mail;
   final List<String> followers;
   final List<String> following;
+  int likesCount;
+  int commentsCount;
 
   SavedPostModel(
-      {required this.followers,
+      { this.likesCount = 0,
+    this.commentsCount = 0,
+        required this.followers,
       required this.following,
       required this.mail,
       required this.uid,

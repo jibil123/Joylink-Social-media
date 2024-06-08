@@ -42,18 +42,21 @@ class ProfileInfo extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Name : ${userName ?? 'No name'}",
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            "${userName ?? 'No name'}",
+                            style: const TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          IconButton(onPressed:()=> Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfileEditScreen())), icon: Icon(Icons.edit,color:AppColors.tealColor,))
+                        ],
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      
                       Text(
-                        bio != null ? "Bio     : $bio" : "Bio     : Null",
+                        bio != null ? "Bio    : $bio" : "Bio     : Null",
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -64,54 +67,7 @@ class ProfileInfo extends StatelessWidget {
                     ],
                   ),
                 ),
-                Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const ProfileEditScreen(),
-                      )),
-                      child: Container(
-                        width: 120,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: AppColors.tealColor,
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Edit',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => UserPosts(
-                            deleteOrSave: true,
-                          ),
-                        ));
-                      },
-                      child: Container(
-                        width: 120,
-                        decoration: BoxDecoration(
-                            color: AppColors.tealColor,
-                            borderRadius: BorderRadius.circular(5)),
-                        child: const Center(
-                          child: Text(
-                            'Activities',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                const SizedBox(height: 10),
               ],
             ),
           ],
