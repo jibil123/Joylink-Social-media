@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/savePost/save_post_bloc.dart';
 import 'package:joylink/utils/colors.dart';
-import 'package:joylink/view/screens/home/post_details.dart';
+import 'package:joylink/view/screens/home/savedPost/saved_post_widget.dart';
 
 class SavedPostScreen extends StatelessWidget {
   const SavedPostScreen({super.key, required this.isSaved});
@@ -38,7 +38,7 @@ class SavedPostScreen extends StatelessWidget {
                 itemCount: savedPosts.length,
                 itemBuilder: (context, index) {
                   final post = savedPosts[index];
-                  return UsersPostCard(
+                  return SavedUsersPostCard(
                     savedPostModel: post,
                     isSaveOrNot: isSaved,
                   );

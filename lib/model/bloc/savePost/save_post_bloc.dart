@@ -23,7 +23,7 @@ class SavePostBloc extends Bloc<SavePostEvent, SavePostState> {
           await firebaseSavePost.savePost({
             'id': event.postId,
             'name': event.name,
-            'profilePic': event.profileImage,
+            'profileImage': event.profileImage,
             'location': event.location,
             'postImage': event.postImage,
             'date': event.date,

@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/cover_image.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/follow_text_widget.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/profile_photo.dart';
+import 'package:joylink/view/screens/profileScreen/widgets/userListScreen/user_list_screen.dart';
 
 class ProfilePhotoScreen extends StatelessWidget {
    ProfilePhotoScreen({super.key});
@@ -36,9 +39,17 @@ final firestore = FirebaseFirestore.instance;
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        followFunction('Following ',following.length),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserListScreen(userIds: following, title: 'Following')));
+                          },
+                          child: followFunction('Following ',following.length)),
                         const SizedBox(height: 10),
-                        followFunction('Followers ',follow.length),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserListScreen(userIds: follow, title: 'Followers')));
+                          },
+                          child: followFunction('Followers ',follow.length)),
                       ],
                     ),
                   );

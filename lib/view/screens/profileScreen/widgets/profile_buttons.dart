@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:joylink/utils/colors.dart';
 import 'package:joylink/view/screens/home/savedPost/saved_post.dart';
+import 'package:joylink/view/screens/profileScreen/userReel/user_reel.dart';
 import 'package:joylink/view/screens/profileScreen/user_post.dart';
 
 class ProfileButtons extends StatelessWidget {
@@ -19,9 +20,10 @@ class ProfileButtons extends StatelessWidget {
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextButton(onPressed: (){
+
             }, child: const Text('Activities',style: TextStyle(color: AppColors.whiteColor))),
            TextButton(onPressed: (){
-            
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserReelScreen()));
             }, child: const Text('Reel',style: TextStyle(color: AppColors.whiteColor),)),
             TextButton(onPressed: (){
               Navigator.of(context).push(MaterialPageRoute(

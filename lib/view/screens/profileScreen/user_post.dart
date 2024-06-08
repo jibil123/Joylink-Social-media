@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/PostFetchBloc/post_bloc.dart';
 import 'package:joylink/utils/media_quary.dart';
+import 'package:joylink/view/screens/home/like_and_comment.dart';
 import 'package:joylink/viewModel/date_and_time/date_and_time.dart';
 
 class UserPosts extends StatelessWidget {
@@ -25,8 +26,6 @@ class UserPosts extends StatelessWidget {
             final posts = state.sortedPosts;
             final currentUserId = FirebaseAuth.instance.currentUser
                 ?.uid;
-                 // Replace with the actual current user ID
-            // Filter the posts list to include only posts by the current user
             final currentUserPosts =
                 posts.where((post) => post.userId == currentUserId).toList();
 
@@ -80,6 +79,7 @@ class UserPosts extends StatelessWidget {
                           width: double.infinity,
                           height: mediaqueryHeight(0.2, context),
                           child: Image.network(
+                            fit: BoxFit.cover,
                             post.image,
                             loadingBuilder: (context, child, loadingProgress) {
                               if (loadingProgress == null) return child;
@@ -96,15 +96,22 @@ class UserPosts extends StatelessWidget {
                             },
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 5),
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            LikeAndCommentButtons(postId: post.postId),
+                              Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 5,right: 10),
                           child: Text(
                               "Posted on : ${dateAndTime.formatRelativeTime(post.dateAndTime)}"),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 5),
-                          child: SizedBox(
-                              height: 40, child: Text(post.description)),
+                          ],
+                        ),                   
+                        SizedBox(
+                          height: 30,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 15),
+                            child: Text(post.description),
+                          ),
                         ),
                       ],
                     ),

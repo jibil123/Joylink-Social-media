@@ -64,7 +64,7 @@ class LikeAndCommentButtons extends StatelessWidget {
             int commentCount = commentSnapshot.data!.docs.length;
 
             return SizedBox(
-              height: 40,
+              height: 35,
               child: Row(
                 children: [
                   Row(
