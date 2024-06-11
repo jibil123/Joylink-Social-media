@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:joylink/utils/colors.dart';
 import 'package:joylink/view/screens/home/savedPost/saved_post.dart';
 import 'package:joylink/view/screens/profileScreen/userReel/user_reel.dart';
-import 'package:joylink/view/screens/profileScreen/user_post.dart';
 
 class ProfileButtons extends StatelessWidget {
   const ProfileButtons({
@@ -22,9 +21,19 @@ class ProfileButtons extends StatelessWidget {
             TextButton(onPressed: (){
 
             }, child: const Text('Activities',style: TextStyle(color: AppColors.whiteColor))),
+           Container(
+              height: 25,
+              width: 2.0,
+              color:AppColors.greyColor,
+            ),
            TextButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserReelScreen()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const UserReelScreen()));
             }, child: const Text('Reel',style: TextStyle(color: AppColors.whiteColor),)),
+             Container(
+              height: 25,
+              width: 2.0,
+              color:AppColors.greyColor,
+            ),
             TextButton(onPressed: (){
               Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => const SavedPostScreen( 

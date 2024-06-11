@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joylink/utils/colors.dart';
 import 'package:joylink/view/screens/profileScreen/profile_edit_screen.dart';
-import 'package:joylink/view/screens/profileScreen/user_post.dart';
 
 class ProfileInfo extends StatelessWidget {
   const ProfileInfo({super.key});
@@ -45,13 +44,13 @@ class ProfileInfo extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "${userName ?? 'No name'}",
+                            userName ?? 'No name',
                             style: const TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          IconButton(onPressed:()=> Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfileEditScreen())), icon: Icon(Icons.edit,color:AppColors.tealColor,))
+                          IconButton(onPressed:()=> Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const ProfileEditScreen())), icon: const Icon(Icons.edit,color:AppColors.tealColor,))
                         ],
                       ),
                       

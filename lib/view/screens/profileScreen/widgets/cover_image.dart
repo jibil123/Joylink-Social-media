@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/profilePhoto/profile_photo_bloc.dart';
 class CoverImage extends StatelessWidget {
   const CoverImage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class CoverImage extends StatelessWidget {
           : null,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (!snapshot.hasData || !snapshot.data!.exists) {
           return placeholder;

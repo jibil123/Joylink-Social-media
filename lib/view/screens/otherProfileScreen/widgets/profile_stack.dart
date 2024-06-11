@@ -88,11 +88,17 @@ class OtherProfileStack extends StatelessWidget {
                     top: 255, // Adjusted top position
                     right: 10, // Adjusted right position
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        followFunction('Following ',following.length),
-                        const SizedBox(height: 10),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            followFunction('Following ',following.length),
+                            const SizedBox(width: 20),
+                           
+                            followFunction('Followers ',follow.length),
+                          ],
+                        ),
+                         Row(
                           children: [
                              BlocBuilder<FollowBloc, FollowState>(
                           builder: (context, state) { 
@@ -121,10 +127,9 @@ class OtherProfileStack extends StatelessWidget {
                             
                           },
                         ),
-                            followFunction('Followers ',follow.length),
+                           
                           ],
                         ),
-                       
                       ],
                     ),
                   );

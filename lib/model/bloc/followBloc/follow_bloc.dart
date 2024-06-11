@@ -21,6 +21,8 @@ class FollowBloc extends Bloc<FollowEvent, FollowState> {
     on<UnfollowUserEvent>((event, emit) async {
       try {
         await userService.unfollowUser(event.currentUserId, event.targetUserId);
+         List<String> updatedUserIds = await userService.fetchFollowing(event.currentUserId);
+         emit(FollowUpdated(updatedUserIds));
       } catch (e) {
         emit(FollowFailure(e.toString()));
       }

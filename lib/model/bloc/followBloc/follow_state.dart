@@ -16,3 +16,8 @@ class FollowFailure extends FollowState {
 
   FollowFailure(this.error);
 }
+
+class FollowUpdated extends FollowState {
+  final List<String> updatedUserIds;
+  FollowUpdated(this.updatedUserIds);
+}

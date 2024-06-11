@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:joylink/model/model/search_model.dart';
 import 'package:joylink/utils/colors.dart';
 import 'package:joylink/view/screens/chatScreen/message_screen.dart';
-import 'package:joylink/view/screens/profileScreen/user_post.dart';
 
 class OtherProfileUserDetails extends StatelessWidget {
   const OtherProfileUserDetails({super.key, required this.userModel});

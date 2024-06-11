@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/firebase_options.dart';
 import 'package:joylink/model/bloc/PostFetchBloc/post_bloc.dart';
 import 'package:joylink/model/bloc/chatBloc/chat_bloc.dart';
+import 'package:joylink/model/bloc/followBloc/follow_bloc.dart';
 import 'package:joylink/model/bloc/themeBloc/theme_bloc.dart';
 import 'package:joylink/model/bloc/postBloc/post_bloc.dart';
 import 'package:joylink/model/bloc/bottomNavigation/bottom_navigation_bloc.dart';
@@ -16,6 +17,7 @@ import 'package:joylink/model/bloc/savePost/save_post_bloc.dart';
 import 'package:joylink/model/bloc/userSearchBloc/user_search_bloc.dart';
 import 'package:joylink/view/screens/splash/splash_screen.dart';
 import 'package:joylink/viewModel/firebase/fetchData/fetch_post_data.dart';
+import 'package:joylink/viewModel/firebase/follow_unfollow/follow_unfollow.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,6 +77,9 @@ class MyApp extends StatelessWidget {
 
         BlocProvider(
           create: (context) => ChatBloc(),
+        ),
+        BlocProvider(
+          create: (context) => FollowBloc(UserService()),
         )
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(

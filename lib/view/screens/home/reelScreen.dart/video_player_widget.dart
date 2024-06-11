@@ -39,11 +39,9 @@ class VideoPlayerWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                   child: SizedBox(
                     width: state.chewieController.videoPlayerController.value
-                            .size?.width ??
-                        0,
+                            .size.width,
                     height: state.chewieController.videoPlayerController.value
-                            .size?.height ??
-                        0,
+                            .size.height,
                     child: Chewie(controller: state.chewieController),
                   ),
                 ),

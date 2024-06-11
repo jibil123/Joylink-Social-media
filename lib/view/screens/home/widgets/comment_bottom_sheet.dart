@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 class CommentBottomSheet extends StatelessWidget {
   final String postId;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   final TextEditingController _commentController = TextEditingController();
 
-  CommentBottomSheet({super.key, 
-    required this.postId,
-  });
+  CommentBottomSheet({super.key, required this.postId});
 
   @override
   Widget build(BuildContext context) {
-    // final likeCommandBloc = BlocProvider.of<LikeCommentBloc>(context);
     return Padding(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -43,14 +41,32 @@ class CommentBottomSheet extends StatelessWidget {
                     itemBuilder: (context, index) {
                       var commentData = snapshot.data!.docs[index].data()
                           as Map<String, dynamic>;
+                      Timestamp timestamp = commentData['timestamp'];
+                      DateTime dateTime = timestamp.toDate();
+                      String formattedDate =
+                          DateFormat('dd MMM yyyy').format(dateTime);
+
                       return ListTile(
                         leading: CircleAvatar(
                           backgroundImage:
                               NetworkImage(commentData['userProfileImage']),
                         ),
                         title: Text(commentData['userName']),
-                        subtitle: Text(commentData['text']),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(commentData['text']),
+                            Text(
+                              formattedDate,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ],
+                        ),
                       );
+                      
                     },
                   );
                 },
@@ -78,8 +94,16 @@ class CommentBottomSheet extends StatelessWidget {
                     onPressed: () async {
                       if (_commentController.text.trim().isEmpty) {
                         return;
+                      } else if (_commentController.text.trim().length > 20) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                           SnackBar(
+                            content: Text(
+                                'Comment length should not exceed 20 characters.'),
+                          ),
+                        );
+                        return;
                       }
-
+                       
                       User? currentUser = FirebaseAuth.instance.currentUser;
                       if (currentUser != null) {
                         DocumentSnapshot userDetailsSnapshot =
@@ -103,10 +127,9 @@ class CommentBottomSheet extends StatelessWidget {
                             'userProfileImage': userProfileImage,
                             'timestamp': FieldValue.serverTimestamp(),
                           });
-                                   _commentController.clear();
-                      // likeCommandBloc.add(LoadLikeCommentEvent(postId: postId));
+                          _commentController.clear();
                         }
-                      }         
+                      }
                     },
                   ),
                 ],

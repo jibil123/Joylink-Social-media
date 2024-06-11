@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:joylink/model/bloc/cubit/video_player_cubit.dart';
@@ -13,17 +14,17 @@ class UserReelScreen extends StatelessWidget {
     final currentUser = FirebaseAuth.instance.currentUser;
 
     if (currentUser == null) {
-      return Scaffold(
+      return const Scaffold(
         body: Center(child: Text('No user logged in')),
       );
     }
 
     final currentUserId = currentUser.uid;
-    print('Current user ID: $currentUserId'); // Log the current user ID
+    // Log the current user ID
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Reel Page'),
+        title: const Text('User Reel Page'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -37,16 +38,20 @@ class UserReelScreen extends StatelessWidget {
           }
 
           if (snapshot.hasError) {
-            print('Error: ${snapshot.error}');
+            if (kDebugMode) {
+              print('Error: ${snapshot.error}');
+            }
             return Center(child: Text('Error: ${snapshot.error}'));
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(child: Text('No videos found'));
+            return const Center(child: Text('No videos found'));
           }
 
           final videos = snapshot.data!.docs;
-          print('Number of videos: ${videos.length}'); // Log the number of videos
+          if (kDebugMode) {
+            print('Number of videos: ${videos.length}');
+          } // Log the number of videos
 
           return PageView.builder(
             scrollDirection: Axis.vertical,
@@ -61,7 +66,6 @@ class UserReelScreen extends StatelessWidget {
               final videoId = videos[index].id;
               final uid = videoData['uid'];
 
-              print('Video ID: $videoId, URL: $videoUrl'); // Log video details
 
               return BlocProvider(
                 create: (_) => VideoPlayerBloc(videoUrl),

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/authBloc/bloc/auth_bloc.dart';
 import 'package:joylink/model/bloc/bottomNavigation/bottom_navigation_bloc.dart';
 import 'package:joylink/model/bloc/themeBloc/theme_bloc.dart';
-import 'package:joylink/utils/appbar.dart';
 import 'package:joylink/utils/colors.dart';
 import 'package:joylink/view/screens/authScreen/mainLoginScreen/login_screen.dart';
 import 'package:joylink/view/screens/settingsScreen/custom_settings_widget.dart';
@@ -17,10 +16,10 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authBloc = BlocProvider.of<AuthBloc>(context);
-    final themeBloc = BlocProvider.of<ThemeBloc>(context);
+    BlocProvider.of<ThemeBloc>(context);
     final bottomNavBar =BlocProvider.of<BottomNavigationBloc>(context);
     return Scaffold(
-        appBar: AppBar(title: Text('Settings'),backgroundColor: AppColors.tealColor,),
+        appBar: AppBar(title: const Text('Settings'),backgroundColor: AppColors.tealColor,),
         body: Padding(
           padding: const EdgeInsets.only(top: 10,right: 20,left: 20),
           child: Column(

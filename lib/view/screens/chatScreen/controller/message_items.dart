@@ -1,39 +1,63 @@
- import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:joylink/view/screens/chatScreen/bubble_chat_screen.dart';
 import 'package:joylink/view/screens/chatScreen/widgets/video_widget.dart';
 
-Widget buildMessageItems(BuildContext context ,DocumentSnapshot document) {
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-    var isSentByMe = (data['senderId'] == firebaseAuth.currentUser!.uid);
+String getFormattedDate(Timestamp timestamp) {
+  DateTime dateTime = timestamp.toDate();
+  return DateFormat('MMM d, yyyy').format(dateTime);
+}
 
-    Timestamp timestamp = data['timeStamp'];
-    DateTime dateTime = timestamp.toDate();
-    String formattedTime = DateFormat('h:mm a').format(dateTime);
- return  Padding(
+Widget buildMessageItems(BuildContext context, DocumentSnapshot document) {
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+  var isSentByMe = (data['senderId'] == firebaseAuth.currentUser!.uid);
+  Timestamp timestamp = data['timeStamp'];
+  String formattedTime = DateFormat('h:mm a').format(timestamp.toDate());
+  String formattedDate = getFormattedDate(timestamp);
+
+   String previousDate = '';
+   
+  return Padding(
     padding: const EdgeInsets.all(10),
-    child: Align(
-      alignment: isSentByMe ? Alignment.centerRight : Alignment.centerLeft,
-      child: ChatBubbleScreen(
-        message: data['message'],
-        time: formattedTime,
-        isSentByMe: isSentByMe,
-        mediaUrl: data['mediaUrl'],
-        mediaType: data['mediaType'],
-        onTap: () {
-          if (data['mediaType'] == 'video') {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => VideoPlayerScreen(url: data['mediaUrl']),
+    child: Column(
+      crossAxisAlignment:
+          isSentByMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      children: [
+        if (formattedDate != previousDate)
+           Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              formattedDate,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
               ),
-            );
-          }
-        },
-      ),
+            ),
+          ),
+        Align(
+          alignment: isSentByMe ? Alignment.centerRight : Alignment.centerLeft,
+          child: ChatBubbleScreen(
+            message: data['message'],
+            time: formattedTime,
+            isSentByMe: isSentByMe,
+            mediaUrl: data['mediaUrl'],
+            mediaType: data['mediaType'],
+            onTap: () {
+              if (data['mediaType'] == 'video') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => VideoPlayerScreen(url: data['mediaUrl']),
+                  ),
+                );
+              }
+            },
+          ),
+        ),
+      ],
     ),
   );
-  }
+}

@@ -44,4 +44,18 @@ class UserService {
       throw Exception("Failed to fetch user: $e");
     }
   }
+
+  Future<List<String>> fetchFollowing(String userId) async {
+    try {
+      DocumentSnapshot userDoc = await _firestore.collection('user details').doc(userId).get();
+      if (userDoc.exists) {
+        Map<String, dynamic> data = userDoc.data() as Map<String, dynamic>;
+        return List<String>.from(data['following']);
+      } else {
+        throw Exception("User not found");
+      }
+    } catch (e) {
+      throw Exception("Failed to fetch following list: $e");
+    }
+  }
 }

@@ -22,6 +22,14 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     final String currentUser = firebaseAth.currentUser!.uid;
     final String receiverId = event.reciverId;
     final Timestamp timestamp = Timestamp.now();
+    final String trimMessage;
+
+    if(event.message.length>15){
+       trimMessage='${event.message.substring(0,15)}...';
+    }else{
+      trimMessage=event.message;
+    }
+
     Message newMessage = Message(
         senterId: currentUser,
         receiverId: event.reciverId,
@@ -36,7 +44,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         .doc(chatRoomId)
         .collection('messages')
         .add(newMessage.toMap());
-
     await firebaseFirestore
         .collection('users')
         .doc(currentUser)
@@ -44,7 +51,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         .doc(chatRoomId)
         .set({
       'receiverId': receiverId,
-      'lastMessage': event.message,
+      'lastMessage': trimMessage,
       'timestamp': Timestamp.now(),
     });
 
@@ -57,7 +64,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         .doc(chatRoomId)
         .set({
       'receiverId': currentUser,
-      'lastMessage': event.message,
+      'lastMessage': trimMessage,
       'timestamp': Timestamp.now(),
     });
   }
