@@ -10,14 +10,14 @@ class CustomAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(title),
-      content: Text(message),
+      title: Text(title,style: const TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
+      content: Text(message,style: const TextStyle(fontSize: 18),),
       actions: <Widget>[
         TextButton(
-          child: Text(childName),
+          child: Text(childName,style: const TextStyle(fontSize: 17)),
           onPressed: () {
-            Navigator.of(context).pop(); // Close the dialog
-            onOkPressed(); // Call the provided callback
+            Navigator.of(context).pop(); 
+            onOkPressed(); 
           },
         ),
       ],

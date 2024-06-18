@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/PostFetchBloc/post_bloc.dart';
@@ -7,8 +6,9 @@ import 'package:joylink/view/screens/home/like_and_comment.dart';
 import 'package:joylink/viewModel/date_and_time/date_and_time.dart';
 
 class UserPosts extends StatelessWidget {
-  UserPosts({super.key, required this.deleteOrSave});
+  UserPosts({super.key, required this.deleteOrSave, required this.currentUserId});
   final bool deleteOrSave;
+  final String currentUserId;
   final DateAndTime dateAndTime = DateAndTime();
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,6 @@ class UserPosts extends StatelessWidget {
           } else if (state is PostLoaded) {
             final users = state.users;
             final posts = state.sortedPosts;
-            final currentUserId = FirebaseAuth.instance.currentUser
-                ?.uid;
             final currentUserPosts =
                 posts.where((post) => post.userId == currentUserId).toList();
 
@@ -34,6 +32,7 @@ class UserPosts extends StatelessWidget {
             }
 
             return ListView.builder(
+              padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: currentUserPosts.length,
@@ -44,6 +43,7 @@ class UserPosts extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Card(
+                    
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

@@ -9,7 +9,7 @@ final bool isSaved = false;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
             bottom: const TabBar(tabs: [
@@ -19,10 +19,21 @@ final bool isSaved = false;
               Tab(
                 text: 'reel',
               ),
-              Tab(
-                text: 'poll',
-              ),
+              // Tab(
+              //   text: 'poll',
+              // ),
             ]),
+            backgroundColor: Colors.teal[200],
+            leading: const Padding(
+            padding: EdgeInsets.only(left: 20), // Adjust padding as needed
+            child: SizedBox(
+              width: 45, // Adjust the width as needed
+              height: 45, // Adjust the height as needed
+              child: Image(
+                image: AssetImage('assets/images/joylink-logo.png'),
+              ),
+            ),
+          ),
              title: const Text(
             'Home',
             style: TextStyle(fontWeight: FontWeight.bold),
@@ -43,7 +54,7 @@ final bool isSaved = false;
           body: const TabBarView(children: [
             HomeScreen(),
             ReelScreen(),
-            Center(child: Text('poll')),
+            // Center(child: Text('poll')),
           ]),
         ));
   }

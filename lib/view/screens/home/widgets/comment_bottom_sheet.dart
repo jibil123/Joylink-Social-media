@@ -41,10 +41,15 @@ class CommentBottomSheet extends StatelessWidget {
                     itemBuilder: (context, index) {
                       var commentData = snapshot.data!.docs[index].data()
                           as Map<String, dynamic>;
-                      Timestamp timestamp = commentData['timestamp'];
-                      DateTime dateTime = timestamp.toDate();
-                      String formattedDate =
-                          DateFormat('dd MMM yyyy').format(dateTime);
+
+                      // Handle null timestamp
+                      Timestamp? timestamp = commentData['timestamp'];
+                      DateTime? dateTime;
+                      String formattedDate = '';
+                      if (timestamp != null) {
+                        dateTime = timestamp.toDate();
+                        formattedDate = DateFormat('dd MMM yyyy').format(dateTime);
+                      }
 
                       return ListTile(
                         leading: CircleAvatar(
@@ -56,17 +61,17 @@ class CommentBottomSheet extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(commentData['text']),
-                            Text(
-                              formattedDate,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey[600],
+                            if (formattedDate.isNotEmpty)
+                              Text(
+                                formattedDate,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey[600],
+                                ),
                               ),
-                            ),
                           ],
                         ),
                       );
-                      
                     },
                   );
                 },
@@ -96,14 +101,14 @@ class CommentBottomSheet extends StatelessWidget {
                         return;
                       } else if (_commentController.text.trim().length > 20) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                           SnackBar(
+                          const SnackBar(
                             content: Text(
                                 'Comment length should not exceed 20 characters.'),
                           ),
                         );
                         return;
                       }
-                       
+
                       User? currentUser = FirebaseAuth.instance.currentUser;
                       if (currentUser != null) {
                         DocumentSnapshot userDetailsSnapshot =
@@ -122,7 +127,7 @@ class CommentBottomSheet extends StatelessWidget {
                               .collection('comments')
                               .add({
                             'text': _commentController.text.trim(),
-                            'user': FirebaseAuth.instance.currentUser!.uid,
+                            'user': currentUser.uid,
                             'userName': userName,
                             'userProfileImage': userProfileImage,
                             'timestamp': FieldValue.serverTimestamp(),

@@ -49,7 +49,7 @@ class SavePostBloc extends Bloc<SavePostEvent, SavePostState> {
     on<FetchPostSavedEvent>((event, emit) async {
       emit(LoadingSavedState());
       try {
-        final String currentUserId = firebaseAuth.currentUser!.uid;
+        final String currentUserId = event.currentUserId;
         final datas = await firebaseSavePost.getSavedPosts(currentUserId);
         emit(LoadedSavedPosts(savedPosts: datas));
       } catch (e) {

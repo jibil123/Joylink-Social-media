@@ -11,7 +11,7 @@ class GoogleSignin extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.read<GoogleAuthBloc>().add(SigninEvent()),
       child: Container(
-        width: MediaQuery.sizeOf(context).width * 0.95,
+        width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: AppColors.primaryColor,

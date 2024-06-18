@@ -8,7 +8,7 @@ class UploadScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
             bottom: const TabBar(tabs: [
@@ -18,16 +18,16 @@ class UploadScreen extends StatelessWidget {
               Tab(
                 text: 'reel',
               ),
-              Tab(
-                text: 'poll',
-              ),
+              // Tab(
+              //   text: 'poll',
+              // ),
             ]),
             title: const Text('post Screen'),
           ),
           body: TabBarView(children: [
             PostScreen(),
            const UploadVideoScreen(),
-            const Center(child: Text('image')),
+            // const Center(child: Text('image')),
           ]),
         ));
   }

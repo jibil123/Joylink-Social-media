@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:joylink/view/screens/profileScreen/user_post.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/profile_buttons.dart';
@@ -24,8 +25,10 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            const ProfileButtons(),
-            UserPosts(deleteOrSave: true)
+             ProfileButtons(currentUserId:  FirebaseAuth.instance.currentUser
+                !.uid,profileScreen: true,),
+            UserPosts(deleteOrSave: true,currentUserId: FirebaseAuth.instance.currentUser
+                !.uid,)
           ],
         ),
       ),

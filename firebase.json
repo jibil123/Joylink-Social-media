@@ -1,1 +1,25 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"joylink-b31dd","appId":"1:724766878438:android:50cd6598432869b7482927","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"joylink-b31dd","configurations":{"android":"1:724766878438:android:50cd6598432869b7482927","ios":"1:724766878438:ios:6369926603908d11482927","macos":"1:724766878438:ios:6369926603908d11482927","web":"1:724766878438:web:5390a6279f983353482927","windows":"1:724766878438:web:7c22566fc3e6c2ab482927"}}}}}}
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "joylink-b31dd",
+                    "appId": "1:724766878438:android:50cd6598432869b7482927",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "joylink-b31dd",
+                    "configurations": {
+                        "android": "1:724766878438:android:50cd6598432869b7482927",
+                        "ios": "1:724766878438:ios:6369926603908d11482927",
+                        "macos": "1:724766878438:ios:6369926603908d11482927",
+                        "web": "1:724766878438:web:5390a6279f983353482927",
+                        "windows": "1:724766878438:web:7c22566fc3e6c2ab482927"
+                    }
+                }
+            }
+        }
+    }
+}

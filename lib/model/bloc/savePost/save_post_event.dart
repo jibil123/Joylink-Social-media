@@ -29,4 +29,8 @@ class UnSavePostEvent extends SavePostEvent {
   UnSavePostEvent({required this.id});
 }
 
-class FetchPostSavedEvent extends SavePostEvent {}
+class FetchPostSavedEvent extends SavePostEvent {
+  final String currentUserId;
+
+  FetchPostSavedEvent({required this.currentUserId});
+}

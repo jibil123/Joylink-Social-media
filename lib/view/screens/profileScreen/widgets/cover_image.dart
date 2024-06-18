@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/profilePhoto/profile_photo_bloc.dart';
+import 'package:joylink/utils/media_quary.dart';
+
 class CoverImage extends StatelessWidget {
   const CoverImage({
     super.key,
@@ -14,11 +16,11 @@ class CoverImage extends StatelessWidget {
     final auth = FirebaseAuth.instance;
     final firestore = FirebaseFirestore.instance;
 
-    // Show a placeholder image while the data is loading
-    Widget placeholder = const Image(
-      height: 250,
+    // Placeholder image while the data is loading
+    Widget placeholder = Image(
+      height: mediaqueryHeight(0.29, context),
       width: double.infinity,
-      image: AssetImage('assets/images/cover_photo.jpg'),
+      image: const AssetImage('assets/images/cover_photo.jpg'),
       fit: BoxFit.cover,
     );
 
@@ -54,19 +56,21 @@ class CoverImage extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Colors.black54, // Set border color here
-                    width: 4, // Set border width here
+                    color: Colors.black54,
+                    width: 4,
                   ),
-                 // Set border radius here
                 ),
                 child: imageUrl != null
                     ? FadeInImage.assetNetwork(
                         placeholder: 'assets/images/cover_photo.jpg',
                         image: imageUrl,
-                        height: 250,
+                        height: mediaqueryHeight(0.29, context),
                         width: double.infinity,
                         fit: BoxFit.cover,
                         fadeInDuration: const Duration(milliseconds: 500),
+                        imageErrorBuilder: (context, error, stackTrace) {
+                          return placeholder; // Fallback UI if image fails to load
+                        },
                       )
                     : placeholder,
               ),

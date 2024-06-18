@@ -5,9 +5,9 @@ import 'package:joylink/utils/colors.dart';
 import 'package:joylink/view/screens/home/savedPost/saved_post_widget.dart';
 
 class SavedPostScreen extends StatelessWidget {
-  const SavedPostScreen({super.key, required this.isSaved});
+  const SavedPostScreen({super.key, required this.isSaved,required this.currentUserId});
   final bool isSaved;
-
+  final String currentUserId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +15,7 @@ class SavedPostScreen extends StatelessWidget {
         title: const Text('Saved Posts'),
       ),
       body: BlocProvider(
-        create: (context) => SavePostBloc()..add(FetchPostSavedEvent()),
+        create: (context) => SavePostBloc()..add(FetchPostSavedEvent(currentUserId: currentUserId)),
         child: BlocConsumer<SavePostBloc, SavePostState>(
           listener: (context, state) {
             if (state is UnSaveSuccessState) {
@@ -23,7 +23,7 @@ class SavedPostScreen extends StatelessWidget {
                 content: Text('Unsave successful'),
                 backgroundColor: AppColors.primaryColor,
               ));
-              context.read<SavePostBloc>().add(FetchPostSavedEvent());  // Fetchupdated posts
+              context.read<SavePostBloc>().add(FetchPostSavedEvent(currentUserId: currentUserId));  // Fetchupdated posts
             }
           },
           builder: (context, state) {

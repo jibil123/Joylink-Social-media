@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Add this line for date formatting
 import 'package:joylink/view/screens/chatScreen/message_screen.dart';
 
 class ChatListScreen extends StatelessWidget {
@@ -61,6 +62,21 @@ class ChatListScreen extends StatelessWidget {
                   final userName = userData['name'] ?? 'No Name';
                   final userProfile = userData['imageUrl'] ?? '';
                   final lastMessage = chatRoom['lastMessage'] ?? '';
+                  final timestamp = chatRoom['timestamp'] as Timestamp;
+
+                  // Formatting the timestamp
+                  String formattedDate;
+                  final DateTime messageDate = timestamp.toDate();
+                  final DateTime currentDate = DateTime.now();
+
+                  if (messageDate.year == currentDate.year &&
+                      messageDate.month == currentDate.month &&
+                      messageDate.day == currentDate.day) {
+                    formattedDate = DateFormat.jm().format(messageDate); // Show time
+                  } else {
+                    formattedDate = DateFormat.yMMMd().format(messageDate); // Show date
+                  }
+
                   return ListTile(
                     leading: userProfile.isNotEmpty
                         ? CircleAvatar(
@@ -70,7 +86,13 @@ class ChatListScreen extends StatelessWidget {
                             child: Icon(Icons.person),
                           ),
                     title: Text(userName),
-                    subtitle: Text(lastMessage),
+                    subtitle: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(lastMessage),
+                        Text(formattedDate, style: const TextStyle(color: Colors.grey)),
+                      ],
+                    ),
                     onTap: () {
                       Navigator.push(
                         context,

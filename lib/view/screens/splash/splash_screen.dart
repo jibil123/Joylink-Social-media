@@ -57,8 +57,8 @@ class SplashScreen extends StatelessWidget {
       child: const Scaffold(
         body: Center(
           child: Image(
-              width: 400,
-              height: 400,
+              width: 300,
+              height: 300,
               image: AssetImage('assets/images/joylink-logo.png')),
         ),
       ),

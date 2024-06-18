@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:joylink/utils/media_quary.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/cover_image.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/follow_text_widget.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/profile_photo.dart';
@@ -13,7 +14,8 @@ final firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 380, // Set the height of the container
+      height: mediaqueryHeight(0.48, context),
+      width: double.infinity, // Set the height of the container
       child: Stack(
         children: [
           const CoverImage(),

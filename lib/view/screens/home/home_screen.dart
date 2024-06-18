@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/PostFetchBloc/post_bloc.dart';
@@ -19,7 +20,7 @@ class HomeScreen extends StatelessWidget {
             content: Text('Post saved successfully!'),
             backgroundColor: AppColors.primaryColor,
           ));
-          postSavebloc.add(FetchPostSavedEvent());
+          postSavebloc.add(FetchPostSavedEvent(currentUserId:FirebaseAuth.instance.currentUser!.uid ));
         } else if (state is SaveFailedState) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Failed to save post'),

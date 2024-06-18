@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/userSearchBloc/user_search_bloc.dart';
@@ -66,11 +67,13 @@ class UserSearchView extends StatelessWidget {
                   var coverImage = userData.containsKey('coverImage')
                       ? userData['coverImage']
                       : '';
-                      var bio = userData.containsKey('bio')
-                      ? userData['bio']
-                      : '';
+                  var bio = userData.containsKey('bio') ? userData['bio'] : '';
                   return ListTile(
                     onTap: () {
+                       if (user['uid'] ==FirebaseAuth.instance.currentUser?.uid) {
+                       
+                        return;
+                      }
                       final UserModel userModel = UserModel(
                           id: user['uid'],
                           name: user['name'],
@@ -79,8 +82,7 @@ class UserSearchView extends StatelessWidget {
                           coverImage: coverImage,
                           bio: bio,
                           followers: user['followers'],
-                          following: user['following']
-                          );
+                          following: user['following']);
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>
                               OtherProfileScreen(userModel: userModel)));

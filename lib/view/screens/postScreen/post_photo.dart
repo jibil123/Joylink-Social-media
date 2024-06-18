@@ -26,7 +26,7 @@ class PostPhotoScreen extends StatelessWidget {
           width: mediaqueryWidth(9, context),
           height: mediaqueryHeight(0.3, context),
           child: postBloc.postModel.photo!=null
-              ? Image.memory(postBloc.postModel.photo!, fit: BoxFit.contain)
+              ? Image.memory(postBloc.postModel.photo!, fit: BoxFit.cover)
               : Center(
                   child: IconButton(
                       onPressed: () async {

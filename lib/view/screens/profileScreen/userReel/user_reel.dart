@@ -7,8 +7,8 @@ import 'package:joylink/view/screens/home/reelScreen.dart/video_player_widget.da
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserReelScreen extends StatelessWidget {
-  const UserReelScreen({super.key});
-
+  const UserReelScreen({super.key, required this.currentUserId});
+  final String currentUserId;
   @override
   Widget build(BuildContext context) {
     final currentUser = FirebaseAuth.instance.currentUser;
@@ -19,7 +19,7 @@ class UserReelScreen extends StatelessWidget {
       );
     }
 
-    final currentUserId = currentUser.uid;
+    // final currentUserId = currentUser.uid;
     // Log the current user ID
 
     return Scaffold(

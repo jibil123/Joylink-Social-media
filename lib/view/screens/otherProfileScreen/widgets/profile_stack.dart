@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:joylink/model/bloc/followBloc/follow_bloc.dart';
 import 'package:joylink/model/model/search_model.dart';
 import 'package:joylink/utils/colors.dart';
+import 'package:joylink/view/screens/chatScreen/message_screen.dart';
 import 'package:joylink/view/screens/profileScreen/widgets/follow_text_widget.dart';
 import 'package:joylink/viewModel/firebase/follow_unfollow/follow_unfollow.dart';
 
@@ -18,12 +19,13 @@ class OtherProfileStack extends StatelessWidget {
     return BlocProvider(
       create: (context) => FollowBloc(UserService()),
       child: SizedBox(
-        height: 400,
+        height: 380,
         child: Stack(
           children: [
             userModel.coverImage.isNotEmpty
-                ? Image.network(
-                    userModel.coverImage,
+                ? FadeInImage.assetNetwork(
+                  placeholder: 'assets/images/cover_photo.jpg',
+                    image:  userModel.coverImage,
                     height: 250,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -85,49 +87,91 @@ class OtherProfileStack extends StatelessWidget {
                   final following = (data?['following'] as List?) ?? [];
 
                   return Positioned(
-                    top: 255, // Adjusted top position
+                    top: 260, // Adjusted top position
                     right: 10, // Adjusted right position
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
+                        SizedBox(
+                          width: 205,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              followFunction('Following ', following.length),
+                              // const SizedBox(width: 15),
+                              followFunction('Followers ', follow.length),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 15),
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            followFunction('Following ',following.length),
-                            const SizedBox(width: 20),
-                           
-                            followFunction('Followers ',follow.length),
-                          ],
-                        ),
-                         Row(
-                          children: [
-                             BlocBuilder<FollowBloc, FollowState>(
-                          builder: (context, state) { 
-                            return ElevatedButton(
-                            
-                              onPressed: () {
-                                
-                                if (follow 
-                                    .contains(firebaseAuth.currentUser!.uid)) {
-                                  context.read<FollowBloc>().add(
-                                      UnfollowUserEvent(
-                                          firebaseAuth.currentUser!.uid, userModel.id));
-                                } else {
-                                  context.read<FollowBloc>().add(
-                                      FollowUserEvent(
-                                          currentUserId:
+                            BlocBuilder<FollowBloc, FollowState>(
+                              builder: (context, state) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    if (follow.contains(
+                                        firebaseAuth.currentUser!.uid)) {
+                                      context.read<FollowBloc>().add(
+                                          UnfollowUserEvent(
                                               firebaseAuth.currentUser!.uid,
-                                          targetUserId: userModel.id));
-                                }
+                                              userModel.id));
+                                    } else {
+                                      context.read<FollowBloc>().add(
+                                          FollowUserEvent(
+                                              currentUserId:
+                                                  firebaseAuth.currentUser!.uid,
+                                              targetUserId: userModel.id));
+                                    }
+                                  },
+                                  child: Container(
+                                    width: 100,
+                                    height: 27,
+                                    decoration: BoxDecoration(
+                                        color: AppColors.tealColor,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Center(
+                                      child: Text(
+                                        follow.contains(
+                                                firebaseAuth.currentUser!.uid)
+                                            ? 'Unfollow'
+                                            : 'Follow',
+                                        style: const TextStyle(
+                                            color: AppColors.whiteColor,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                );
                               },
-                              child: Text(
-                                  follow.contains(firebaseAuth.currentUser!.uid)
-                                      ? 'Unfollow'
-                                      : 'Follow'),
-                            );
-                            
-                          },
-                        ),
-                           
+                            ),
+                            const SizedBox(width: 10),
+                            GestureDetector(
+                              onTap: () =>
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ChatScreen(
+                                  reciverId: userModel.id,
+                                ),
+                              )),
+                              child: Container(
+                                width: 100,
+                                height: 27,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: AppColors.tealColor,
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    'Message',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.whiteColor),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ],

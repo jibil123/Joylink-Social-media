@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,7 +67,7 @@ class MyApp extends StatelessWidget {
           )..add(FetchPostsEvent()),
         ),
         BlocProvider(
-          create: (context) => SavePostBloc()..add(FetchPostSavedEvent()),
+          create: (context) => SavePostBloc()..add(FetchPostSavedEvent(currentUserId: FirebaseAuth.instance.currentUser!.uid)),
         ),
         BlocProvider(
           create: (context) => ThemeBloc(),

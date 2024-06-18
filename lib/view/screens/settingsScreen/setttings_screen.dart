@@ -6,74 +6,74 @@ import 'package:joylink/model/bloc/themeBloc/theme_bloc.dart';
 import 'package:joylink/utils/colors.dart';
 import 'package:joylink/view/screens/authScreen/mainLoginScreen/login_screen.dart';
 import 'package:joylink/view/screens/settingsScreen/custom_settings_widget.dart';
+import 'package:joylink/view/screens/settingsScreen/seperate_settings_screens/info.dart';
+import 'package:joylink/view/screens/settingsScreen/seperate_settings_screens/privacy_policy.dart';
+import 'package:joylink/view/screens/settingsScreen/seperate_settings_screens/terms_conditions.dart';
 import 'package:joylink/view/screens/widgets/custom_alert_dialog.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
 
-  // final bool isSwitched = false;
+  Future<String> _getAppVersion() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.version;
+  }
 
   @override
   Widget build(BuildContext context) {
     final authBloc = BlocProvider.of<AuthBloc>(context);
     BlocProvider.of<ThemeBloc>(context);
-    final bottomNavBar =BlocProvider.of<BottomNavigationBloc>(context);
+    final bottomNavBar = BlocProvider.of<BottomNavigationBloc>(context);
+    
     return Scaffold(
-        appBar: AppBar(title: const Text('Settings'),backgroundColor: AppColors.tealColor,),
+        appBar: AppBar(
+          title: const Text('Settings'),
+          backgroundColor: AppColors.tealColor,
+        ),
         body: Padding(
-          padding: const EdgeInsets.only(top: 10,right: 20,left: 20),
+          padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
           child: Column(
             children: [
               SettingsItem(
                   icon: Icons.privacy_tip_outlined,
                   text: 'Terms and conditions',
-                  onTap: () {}),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  const TermsConditionsScreen ()));
+                  }),
               const SizedBox(height: 20),
               SettingsItem(
                   icon: Icons.private_connectivity,
                   text: 'Privacy and policy',
-                  onTap: () {}),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  const PrivacyPolicyScreen()));
+                  }),
               const SizedBox(height: 20),
-              SettingsItem(icon: Icons.info, text: 'Info', onTap: () {}),
+              SettingsItem(
+                  icon: Icons.info,
+                  text: 'Info',
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AboutScreen()));
+                  }),
               const SizedBox(height: 20),
               SettingsItem(icon: Icons.share, text: 'Share', onTap: () {}),
-              // const SizedBox(height: 20),
-              // BlocBuilder<ThemeBloc, ThemeState>(
-              //   builder: (context, state) {
-              //     return Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //       children: [
-              //         state.isSwitched
-              //             ? const Text(
-              //                 'Change to dark mode',
-              //                 style: TextStyle(
-              //                   fontSize: 23,
-              //                   fontWeight: FontWeight.bold,
-              //                   fontFamily: 'ABeeZee',
-              //                 ),
-              //               )
-              //             : const Text(
-              //                 'Change to light mode',
-              //                 style: TextStyle(
-              //                   fontSize: 23,
-              //                   fontWeight: FontWeight.bold,
-              //                   fontFamily: 'ABeeZee',
-              //                 ),
-              //               ),
-              //         Switch.adaptive(
-              //             activeColor: AppColors.primaryColor,
-              //             value: state.isSwitched,
-              //             onChanged: (bool value) {
-              //               if (value) {
-              //                 themeBloc.add(DarkThemeEvent(isSwitched: value));
-              //               } else {
-              //                 themeBloc.add(LightThemeEvent(isSwitched: value));
-              //               }
-              //             }),
-              //       ],
-              //     );
-              //   },
-              // ),
+              const SizedBox(height: 20),
+              FutureBuilder<String>(
+                future: _getAppVersion(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return const Text('Error loading version');
+                  } else {
+                    return SettingsItem(
+                      icon: Icons.info_outline,
+                      text: 'Version ${snapshot.data}',
+                      onTap: () {},
+                    );
+                  }
+                },
+              ),
               const SizedBox(height: 20),
               SettingsItem(
                   icon: Icons.logout,
@@ -83,18 +83,16 @@ class SettingScreen extends StatelessWidget {
                         context: context,
                         builder: (context) => CustomAlertDialog(
                               title: "Log out",
-                              message: 'are you sure?',
+                              message: 'exit from JoyLink',
                               onOkPressed: () {
                                 authBloc.add(LogoutEvent());
                                 bottomNavBar.add(BottomNavBarPressed(currentPage: 0));
                                 Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (_) =>
-                                          const LoginScreenWrapper()),
+                                  MaterialPageRoute(builder: (_) => const LoginScreenWrapper()),
                                   (route) => false,
                                 );
                               },
-                              childName: 'yes',
+                              childName: 'Ok',
                             ));
                   }),
               const SizedBox(height: 10),
@@ -103,3 +101,4 @@ class SettingScreen extends StatelessWidget {
         ));
   }
 }
+ 
